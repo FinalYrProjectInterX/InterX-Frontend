@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const read = () => {
+const upsc = ({user, logout}) => {
   return (
     <div className="bg-gray-900 min-h-screen">
-      <Navbar/>
+      <Navbar user={user} logout={logout}/>
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         <p className="text-4xl my-2">Browse the Interview Scripts of Specific Category and give it a read!!</p>
         <p className='text-xl my-2'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, nostrum! Minima veritatis velit asperiores fugit provident, dolore rerum quam, commodi cum saepe possimus id incidunt laborum. Quas, enim? Rem obcaecati in eos.</p>
@@ -40,4 +40,4 @@ const read = () => {
   )
 }
 
-export default read
+export default upsc
