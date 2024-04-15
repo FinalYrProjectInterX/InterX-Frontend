@@ -1,16 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
-import Navbar from '../components/Navbar'
-import indexStyle from '../styles/index.module.css';
+import indexStyle from '../../styles/index.module.css';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../../components/SearchBar';
+import Navbar from '@/components/Navbar';
 
-const ias= () => {
+const ias= ({user, logout}) => {
   return (
     <div className="bg-gray-900 min-h-screen">
-      <Navbar/>
+      <Navbar user={user} logout={logout}/>
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         
       <div className="container mx-auto p-4">
