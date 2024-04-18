@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="bg-black-900 min-h-screen">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
         <div className="mx-auto flex flex-col justify-center items-center min-h-screen">
           <div className="mb-20">
