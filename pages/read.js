@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import jsonData from '../JsonData/categories.json';
+import Footer from '@/components/Footer';
 
 const CategoryBlock = ({item}) => {
   return (
@@ -37,6 +38,7 @@ const read = ({user, logout}) => {
           })}
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

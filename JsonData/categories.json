@@ -16,21 +16,21 @@
         "id": 1.2,
         "name": "IPS",
         "description": "Indian Police Service - Law enforcement leadership roles",
-        "slug":"ips",
+        "slug":"upsc-ips",
         "subCategories": []
       },
       {
         "id": 1.3,
         "name": "IRS",
         "description": "Indian Revenue Service - Taxation and financial roles",
-        "slug":"irs",
+        "slug":"upsc-irs",
         "subCategories": []
       },
       {
         "id": 1.4,
         "name": "IFS",
         "description": "Indian Foreign Service - Diplomatic and international affairs",
-        "slug":"ifs",
+        "slug":"upsc-ifs",
         "subCategories": []
       }
     ]
@@ -45,14 +45,14 @@
         "id": 2.1,
         "name": "Indian MBA",
         "description": "MBA programs in India - National business education",
-        "slug":"indian-mba",
+        "slug":"mba-indian-mba",
         "subCategories": []
       },
       {
         "id": 2.2,
         "name": "International MBA",
         "description": "MBA programs outside India - Global business education",
-        "slug":"international-mba",
+        "slug":"mba-international-mba",
         "subCategories": []
       }
     ]
@@ -81,21 +81,21 @@
         "id": 5.1,
         "name": "Indian Army",
         "description": "Land-based branch of Indian Armed Forces - Ground defense roles",
-        "slug":"indian-army",
+        "slug":"indian-armed-forces-indian-army",
         "subCategories": []
       },
       {
         "id": 5.2,
         "name": "Indian Navy",
         "description": "Naval branch of Indian Armed Forces - Maritime defense roles",
-        "slug":"indian-navy",
+        "slug":"indian-armed-forces-indian-navy",
         "subCategories": []
       },
       {
         "id": 5.3,
         "name": "Indian Airforce",
         "description": "Aerial branch of Indian Armed Forces - Air defense roles",
-        "slug":"indian-airforce",
+        "slug":"indian-armed-forces-indian-airforce",
         "subCategories": []
       }
     ]

@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import jsonData from '../../JsonData/categories.json';
+import Footer from '@/components/Footer';
 
 const SubCategoryBlock = ({item}) => {
   return (
-    <Link href={`/category/`} className={`flex flex-col items-center ${indexStyle.blockstyle}`}>
+    <Link href={`/transcripts/${item.slug}`} className={`flex flex-col items-center ${indexStyle.blockstyle}`}>
       <dt className="mt-4 font-semibold text-3xl">{item.name}</dt>
       <dd className="mt-2 leading-7 text-center text-gray-400">{item.description}</dd>
       <FontAwesomeIcon icon={faArrowRight} className='mt-4'/>
@@ -52,6 +53,7 @@ const DynamicCategories = ({user, logout}) => {
           })}
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

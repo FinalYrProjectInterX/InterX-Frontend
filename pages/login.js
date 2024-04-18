@@ -2,6 +2,9 @@ import Navbar from '@/components/Navbar'
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Footer from '@/components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const login = ({user, logout}) => {
   const router=useRouter();
@@ -27,16 +30,19 @@ const login = ({user, logout}) => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     console.log("Login Successfully.");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/login`, {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         email: email,
-        password: password,
+        password: password
       }),
     });
     const JSONdata = await response.json();
     console.log(JSONdata);
-    if (JSONdata.success) {
+    if (response.status==200) {
       localStorage.setItem('token', JSON.stringify(JSONdata.authToken));
       user.value = JSONdata.authToken;
       router.back();
@@ -57,8 +63,9 @@ const login = ({user, logout}) => {
 
   return (
     <div className="bg-gray-900 min-h-screen">
+      <ToastContainer />
       <Navbar user={user} logout={logout}/>
-      <div className='flex flex-col items-center justify-center mt-24'>
+      <div className='flex flex-col items-center justify-center h-[85vh]'>
         <div className="mb-4 text-black w-1/2">
           <label for="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">UserName/Email</label>
           <input type="text" id="name" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Jen bazos" onChange={handleEmailChange} required />
@@ -79,6 +86,7 @@ const login = ({user, logout}) => {
           <p>Don't Have an Account ? <Link href="/signup" className=''>SignUp</Link></p>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }
