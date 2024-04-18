@@ -25,15 +25,53 @@
     "subCategories":[]
   },
   {
-    "id":3,
-    "name":"Tech",
-    "description":"Lorem ipsum dolor sit amet consectetur, adipis elit. Asperiores, nostrum! Minima veritatis velit asperi fugit provident, dolore rerum quam, commodi cum saepe possimus id incidunt laborum. Quas, enim? Rem obcaecati in eos.",
-    "subCategories":[]
+    "id": 3,
+    "name": "VISA",
+    "description": "Interviews for Visa application - Immigration assessment process",
+    "slug":"visa-interview",
+    "subCategories": []
   },
   {
-    "id":4,
-    "name":"Tech",
-    "description":"Lorem ipsum dolor sit amet consectetur, adipis elit. Asperiores, nostrum! Minima veritatis velit asperi fugit provident, dolore rerum quam, commodi cum saepe possimus id incidunt laborum. Quas, enim? Rem obcaecati in eos.",
-    "subCategories":[]
+    "id": 4,
+    "name": "Coding & Technical",
+    "description": "Technical interviews for coding roles - Software development assessments",
+    "slug":"coding-technical",
+    "subCategories": []
+  },
+  {
+    "id": 5,
+    "name": "Indian Armed Forces",
+    "description": "Military services in India - National defense and security roles",
+    "slug":"indian-armed-forces",
+    "subCategories": [
+      {
+        "id": 5.1,
+        "name": "Indian Army",
+        "description": "Land-based branch of Indian Armed Forces - Ground defense roles",
+        "slug":"indian-army",
+        "subCategories": []
+      },
+      {
+        "id": 5.2,
+        "name": "Indian Navy",
+        "description": "Naval branch of Indian Armed Forces - Maritime defense roles",
+        "slug":"indian-navy",
+        "subCategories": []
+      },
+      {
+        "id": 5.3,
+        "name": "Indian Airforce",
+        "description": "Aerial branch of Indian Armed Forces - Air defense roles",
+        "slug":"indian-airforce",
+        "subCategories": []
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Bank PO",
+    "slug":"bank-po",
+    "description": "Probationary Officer roles in Banks - Entry-level banking positions",
+    "subCategories": []
   }
 ]
