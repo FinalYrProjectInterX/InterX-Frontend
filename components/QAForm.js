@@ -12,7 +12,7 @@ const QAForm = ({onSubmit}) => {
     setans(event.target.value);
   }
   const onSubmitQuestion = (event) => {
-    const newQuesAns = [...quesans, { Question: ques, Answer: ans }];
+    const newQuesAns = [...quesans, { "Question": ques, "Answer": ans }];
     setquesans(newQuesAns);
     console.log("quesans", quesans);
     setques('');

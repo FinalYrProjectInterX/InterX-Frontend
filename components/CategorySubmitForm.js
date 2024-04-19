@@ -6,11 +6,16 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
   const [clearedInterview, setClearedInterview] = useState('');
   const [additionalFields, setAdditionalFields] = useState({});
+  const [categoryslug, setcategoryslug] = useState('');
+  const [urlslug, seturlslug] = useState('');
 
   const handleCategoryChange = (event) => {
     const categoryValue = event.target.value;
     setSelectedCategory(categoryValue);
-
+    const foundCategory = jsonData.find((cat) => cat.name === categoryValue);
+    if(foundCategory){
+      setcategoryslug(foundCategory.slug);
+    }
     // Reset subcategory and additional fields when category changes
     setSelectedSubCategory('');
     setAdditionalFields({});
@@ -19,6 +24,14 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const handleSubCategoryChange = (event) => {
     const subCategoryValue = event.target.value;
     setSelectedSubCategory(subCategoryValue);
+    const foundCategory = jsonData.find((cat) => cat.name === selectedCategory);
+    if(foundCategory){
+      const subCategories = foundCategory.subCategories;
+      const subCategory = subCategories.find((subcat) => subcat.name === subCategoryValue);
+      if(subCategory){
+        setcategoryslug(subCategory.slug);
+      }
+    }
     setAdditionalFields({});
   };
 
@@ -37,6 +50,8 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   };
 
   const handleSubmit = () => {
+    console.log("categoryslug+++", categoryslug);
+    console.log("urlslug+++", urlslug);
     onSubmitCategory(
       clearedInterview,
       selectedCategory,
