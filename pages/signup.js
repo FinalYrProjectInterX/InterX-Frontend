@@ -43,7 +43,7 @@ const signup = ({user, logout}) => {
     console.log(response.status);
     if(response.status==200){
       localStorage.setItem('token',JSON.stringify(jsonData.authToken));
-      user.value = JSONdata.authToken;
+      user.value = jsonData.authToken;
       router.back();
     }
     else if(response.status==400){
