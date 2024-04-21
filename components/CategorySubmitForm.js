@@ -15,6 +15,10 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     const foundCategory = jsonData.find((cat) => cat.name === categoryValue);
     if(foundCategory){
       setcategoryslug(foundCategory.slug);
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
+      const temp = foundCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+      seturlslug(temp);
     }
     // Reset subcategory and additional fields when category changes
     setSelectedSubCategory('');
@@ -30,6 +34,10 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       const subCategory = subCategories.find((subcat) => subcat.name === subCategoryValue);
       if(subCategory){
         setcategoryslug(subCategory.slug);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
+        const temp = subCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+        seturlslug(temp);
       }
     }
     setAdditionalFields({});
@@ -51,11 +59,12 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
 
   const handleSubmit = () => {
     console.log("categoryslug+++", categoryslug);
-    console.log("urlslug+++", urlslug);
     onSubmitCategory(
       clearedInterview,
       selectedCategory,
       selectedSubCategory,
+      categoryslug,
+      urlslug,
       additionalFields,
     );
   };

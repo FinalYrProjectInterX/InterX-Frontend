@@ -5,6 +5,9 @@ import CategorySubmitForm from "@/components/CategorySubmitForm";
 import QAForm from "@/components/QAForm";
 import { useRouter } from "next/router";
 import AdditionalInfo from "@/components/AdditionalInfo";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Footer from "@/components/Footer";
 
 const contribute = ({ user, logout }) => {
   const router = useRouter();
@@ -51,6 +54,8 @@ const contribute = ({ user, logout }) => {
   const [commissionType, setcomissionType] = useState("");
   const [bankName, setbankName] = useState("");
   const [token, settoken] = useState("");
+  const [categorySlug, setcategoryslug] = useState("");
+  const [urlSlug, seturlSlug] = useState("");
 
   // const onSubmitPersonalInfo = (name, contact, email, degree) => {
   //   setname(name);
@@ -65,11 +70,13 @@ const contribute = ({ user, logout }) => {
   //   setQAFormDisplay("none");
   // }
 
-  const onSubmitCategory = (clearedInterview, category, subCategory, additionalFields) => {
+  const onSubmitCategory = (clearedInterview, category, subCategory, categorySlug, urlSlug, additionalFields) => {
     console.log("clearedInterview", clearedInterview);
     console.log("category", category);
     console.log("subCategory", subCategory);
     console.log("additionalFields", additionalFields);
+    setcategoryslug(categorySlug);
+    seturlSlug(urlSlug);
     setclearedInterview(clearedInterview);
     setcategory(category);
     setsubCategory(subCategory);
@@ -108,6 +115,7 @@ const contribute = ({ user, logout }) => {
     console.log("tips++", tips);
     console.log("additionalInfo++", additionalInfo);
     console.log("experience++", experience);
+    console.log("urlSlug+++", urlSlug);
     settips(tips);
     setadditionalInfo(additionalInfo);
     setexperience(experience);
@@ -124,36 +132,63 @@ const contribute = ({ user, logout }) => {
         interview_name: clearedInterview,
         category: category,
         subCategory: subCategory,
-        optional_subject: "optionalSubject",
-        gap_years: "gapYears",
-        year_of_interview: "InterviewYear",
-        specialization: "specialization",
-        work_experience: "workExperience",
-        exam_scores: "catScore",
-        visa_type: "visaType",
-        country_applied_for_visa: "appliedCountryForVisa",
-        purpose_of_travel: "purposeOfTravel",
-        programming_languages: "programmingLanguages",
-        tech_stack_used: "techStackUsed",
-        branch: "branch",
-        commision_type: "commissionType",
-        bank_name: "bankName",
-        interview_experience: "experience",
-        interview_tips: "tips",
-        additional_info: "additionalInfo",
+        optional_subject: optionalSubject?optionalSubject:"",
+        gap_years: gapYears?gapYears:"",
+        year_of_interview: InterviewYear?InterviewYear:"",
+        specialization: specialization?specialization:"",
+        work_experience: workExperience?workExperience:"",
+        exam_scores: catScore?catScore:"",
+        visa_type: visaType?visaType:"",
+        country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
+        purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
+        programming_languages: programmingLanguages?programmingLanguages:"",
+        tech_stack_used: techStackUsed?techStackUsed:"",
+        branch: branch?branch:"",
+        commision_type: commissionType?commissionType:"",
+        bank_name: bankName?bankName:"",
+        interview_experience: experience?experience:"",
+        interview_tips: tips?tips:"",
+        additional_info: additionalInfo?additionalInfo:"",
         rating: 0,
-        category_slug: "",
-        slug: "",
-        questions_answers: []
+        category_slug: categorySlug?categorySlug:"",
+        slug: urlSlug?urlSlug:"",
+        status: "Pending",
+        questions_answers: quesans
       })
     });
     console.log("response+++", response);
     const JSONdata = await response.json();
     console.log("JSONdata+++", JSONdata);
+    if (response.status==200) {
+      toast.success("Transcript Created Successfully!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else{
+      toast.error("Some Error Occured!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <>
+    <div className="h-auto">
+      <ToastContainer />
       <Navbar user={user} logout={logout} />
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         <p className="text-4xl my-2">
@@ -177,6 +212,10 @@ const contribute = ({ user, logout }) => {
         <AdditionalInfo onSubmitAdditionalInfo={onSubmitAdditionalInfo} />
       </div>
     </div>
+    <div className="mt-32">
+      <Footer/>
+    </div>
+    </>
   );
 };
 

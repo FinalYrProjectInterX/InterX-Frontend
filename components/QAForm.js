@@ -48,7 +48,7 @@ const QAForm = ({onSubmit}) => {
           type="button"
           data-ripple-light="true"
         >
-          Submit
+          Continue
         </button>
       </div>
     </div>

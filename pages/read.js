@@ -25,7 +25,7 @@ const read = ({user, logout}) => {
     console.log("jsonData", jsonData);
   }, [])
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="min-h-screen">
       <Navbar user={user} logout={logout}/>
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         <p className="text-4xl my-2">Browse the Interview Scripts of Specific Category and give it a read!!</p>
@@ -44,3 +44,5 @@ const read = ({user, logout}) => {
 }
 
 export default read
+
+

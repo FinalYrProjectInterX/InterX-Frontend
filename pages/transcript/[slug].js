@@ -3,10 +3,11 @@ import Navbar from '@/components/Navbar'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-const detailPage = ({user, logout}) => {
+const detailPage = ({user, logout, transcript}) => {
   const router = useRouter();
   const {slug} = router.query;
   console.log("slug++", slug);
+  console.log("transcript+++", transcript);
 
   return (
     <div className='bg-gray-900 min-h-screen'>
@@ -71,3 +72,24 @@ const detailPage = ({user, logout}) => {
 }
 
 export default detailPage
+
+export async function getServerSideProps(context){
+  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/get_transcript_by_url_slug`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category_slug: context.query.slug
+    }),
+  });
+  console.log("response+++", response);
+  let transcript = {};
+  if(response.status==200){
+    transcript = await response.json();
+  }
+  console.log("transcript+++", transcript);
+  return{
+    props:{transcript: transcript}
+  }
+}

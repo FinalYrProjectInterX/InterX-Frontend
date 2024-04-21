@@ -7,11 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '../../components/SearchBar';
 import Footer from '@/components/Footer';
+import mongoose from 'mongoose';
+import InterviewTranscript from '@/models/InterviewTranscript';
 
-const Transcripts = ({user, logout}) => {
+const Transcripts = ({user, logout, transcripts}) => {
+  console.log(transcripts);
   const router = useRouter();
   const { slug } = router.query;
-  console.log("slug", slug);
+  // console.log("slug", slug);
 
   return (
     <div className="bg-gray-900 min-h-screen">
@@ -47,4 +50,23 @@ const Transcripts = ({user, logout}) => {
 
 export default Transcripts
 
-
+export async function getServerSideProps(context){
+  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category_slug: context.query.slug
+    }),
+  });
+  // console.log("response+++", response);
+  let transcripts = [];
+  if(response.status==200){
+    transcripts = await response.json();
+  }
+  // console.log("transcripts+++", transcripts);
+  return{
+    props:{transcripts: transcripts}
+  }
+}
