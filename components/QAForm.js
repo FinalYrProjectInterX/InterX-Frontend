@@ -12,7 +12,7 @@ const QAForm = ({onSubmit}) => {
     setans(event.target.value);
   }
   const onSubmitQuestion = (event) => {
-    const newQuesAns = [...quesans, { Question: ques, Answer: ans }];
+    const newQuesAns = [...quesans, { "Question": ques, "Answer": ans }];
     setquesans(newQuesAns);
     console.log("quesans", quesans);
     setques('');
@@ -48,7 +48,7 @@ const QAForm = ({onSubmit}) => {
           type="button"
           data-ripple-light="true"
         >
-          Submit
+          Continue
         </button>
       </div>
     </div>

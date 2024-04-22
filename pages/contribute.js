@@ -5,15 +5,21 @@ import CategorySubmitForm from "@/components/CategorySubmitForm";
 import QAForm from "@/components/QAForm";
 import { useRouter } from "next/router";
 import AdditionalInfo from "@/components/AdditionalInfo";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Footer from "@/components/Footer";
 
 const contribute = ({ user, logout }) => {
   const router = useRouter();
 
-  // useEffect(()=>{
-  //   if(!localStorage.getItem('token')){
-  //     router.push('/signup');
-  //   }
-  // },[])
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      router.push('/signup');
+    }
+    else{
+      settoken(JSON.parse(localStorage.getItem('token')));
+    }
+  },[])
 
   // const [name, setname] = useState('');
   // const [contact, setcontact] = useState('');
@@ -34,6 +40,22 @@ const contribute = ({ user, logout }) => {
   const [gapYears, setgapYears] = useState("");
   const [marks, setmarks] = useState("");
   const [InterviewYear, setInterviewYear] = useState("");
+  const [specialization, setspecialization] = useState("");
+  const [workExperience, setworkExperience] = useState("");
+  const [catScore, setcatScore] = useState("");
+  const [admissionYear, setadmissionYear] = useState("");
+  const [visaType, setvisaType] = useState("");
+  const [appliedCountryForVisa, setappliedCountryForVisa] = useState("");
+  const [purposeOfTravel, setpurposeOfTravel] = useState("");
+  const [programmingLanguages, setprogrammingLanguages] = useState([]);
+  const [techStackUsed, settechStackUsed] = useState([]);
+  const [serviceName, setserviceName] = useState("");
+  const [branch, setbranch] = useState("");
+  const [commissionType, setcomissionType] = useState("");
+  const [bankName, setbankName] = useState("");
+  const [token, settoken] = useState("");
+  const [categorySlug, setcategoryslug] = useState("");
+  const [urlSlug, seturlSlug] = useState("");
 
   // const onSubmitPersonalInfo = (name, contact, email, degree) => {
   //   setname(name);
@@ -48,11 +70,13 @@ const contribute = ({ user, logout }) => {
   //   setQAFormDisplay("none");
   // }
 
-  const onSubmitCategory = (clearedInterview, category, subCategory, additionalFields) => {
+  const onSubmitCategory = (clearedInterview, category, subCategory, categorySlug, urlSlug, additionalFields) => {
     console.log("clearedInterview", clearedInterview);
     console.log("category", category);
     console.log("subCategory", subCategory);
     console.log("additionalFields", additionalFields);
+    setcategoryslug(categorySlug);
+    seturlSlug(urlSlug);
     setclearedInterview(clearedInterview);
     setcategory(category);
     setsubCategory(subCategory);
@@ -60,6 +84,19 @@ const contribute = ({ user, logout }) => {
     setmarks(additionalFields["Marks"]);
     setoptionalSubject(additionalFields["Optional Subject"]);
     setInterviewYear(additionalFields["Year of Interview"]);
+    setadmissionYear(additionalFields["Year of Admission"]);
+    setspecialization(additionalFields["Specialization"]);
+    setworkExperience(additionalFields["Work Experience"]);
+    setcatScore(additionalFields["CAT/GMAT Score"]);
+    setvisaType(additionalFields["VISA Type"]);
+    setappliedCountryForVisa(additionalFields["Country Applied for VISA"]);
+    setpurposeOfTravel(additionalFields["Purpose of Travel"]);
+    setprogrammingLanguages(additionalFields["Programming Languages"]);
+    settechStackUsed(additionalFields["Tech Stack Used"]);
+    setserviceName(additionalFields["Service Name"]);
+    setbranch(additionalFields["Branch"]);
+    setcomissionType(additionalFields["Commission Type"]);
+    setbankName(additionalFields["Bank Name"]);
     setcategorySubmitFormDisplay("none");
     setQAFormDisplay("block");
     setAdditionalInfoDisplay("none");
@@ -78,6 +115,7 @@ const contribute = ({ user, logout }) => {
     console.log("tips++", tips);
     console.log("additionalInfo++", additionalInfo);
     console.log("experience++", experience);
+    console.log("urlSlug+++", urlSlug);
     settips(tips);
     setadditionalInfo(additionalInfo);
     setexperience(experience);
@@ -87,47 +125,70 @@ const contribute = ({ user, logout }) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/create_transcript`, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJleHAiOjE3MTM2Mzg1OTR9.xAY-wF_TPV9DBvyG3qqdkxZhKGHWW7uhr4DXDN0Xt1M`
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        interview_name: "Interview Name",
-        category: "Category",
-        subCategory: "Subcategory",
-        optional_subject: "Optional Subject",
-        gap_years: "Gap Years",
-        year_of_interview: "Year of Interview",
-        specialization: "Specialization",
-        work_experience: "Work Experience",
-        exam_scores: "Exam Scores",
-        visa_type: "Visa Type",
-        country_applied_for_visa: "Country Applied for Visa",
-        purpose_of_travel: "Purpose of Travel",
-        programming_languages: ["Language 1", "Language 2"],
-        tech_stack_used: ["Tech 1", "Tech 2"],
-        problem_solving_approach: "Problem Solving Approach",
-        branch: "Branch",
-        commision_type: "Commission Type",
-        bank_name: "Bank Name",
-        selection_process_details: "Selection Process Details",
-        interview_experience: "Interview Experience",
-        interview_tips: "Interview Tips",
-        rating: 4.5,
-        category_slug: "category-slug",
-        slug: "transcript-slug",
-        questions_answers: [{
-          "ques": "sujal",
-          "ans": "sahu"
-        }]
+        token: token,
+        interview_name: clearedInterview,
+        category: category,
+        subCategory: subCategory,
+        optional_subject: optionalSubject?optionalSubject:"",
+        gap_years: gapYears?gapYears:"",
+        year_of_interview: InterviewYear?InterviewYear:"",
+        specialization: specialization?specialization:"",
+        work_experience: workExperience?workExperience:"",
+        exam_scores: catScore?catScore:"",
+        visa_type: visaType?visaType:"",
+        country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
+        purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
+        programming_languages: programmingLanguages?programmingLanguages:"",
+        tech_stack_used: techStackUsed?techStackUsed:"",
+        branch: branch?branch:"",
+        commision_type: commissionType?commissionType:"",
+        bank_name: bankName?bankName:"",
+        interview_experience: experience?experience:"",
+        interview_tips: tips?tips:"",
+        additional_info: additionalInfo?additionalInfo:"",
+        rating: 0,
+        category_slug: categorySlug?categorySlug:"",
+        slug: urlSlug?urlSlug:"",
+        status: "Pending",
+        questions_answers: quesans
       })
     });
     console.log("response+++", response);
     const JSONdata = await response.json();
     console.log("JSONdata+++", JSONdata);
+    if (response.status==200) {
+      toast.success("Transcript Created Successfully!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else{
+      toast.error("Some Error Occured!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <>
+    <div className="h-auto">
+      <ToastContainer />
       <Navbar user={user} logout={logout} />
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         <p className="text-4xl my-2">
@@ -151,6 +212,10 @@ const contribute = ({ user, logout }) => {
         <AdditionalInfo onSubmitAdditionalInfo={onSubmitAdditionalInfo} />
       </div>
     </div>
+    <div className="mt-32">
+      <Footer/>
+    </div>
+    </>
   );
 };
 

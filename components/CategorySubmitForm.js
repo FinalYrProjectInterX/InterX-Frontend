@@ -6,11 +6,20 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
   const [clearedInterview, setClearedInterview] = useState('');
   const [additionalFields, setAdditionalFields] = useState({});
+  const [categoryslug, setcategoryslug] = useState('');
+  const [urlslug, seturlslug] = useState('');
 
   const handleCategoryChange = (event) => {
     const categoryValue = event.target.value;
     setSelectedCategory(categoryValue);
-
+    const foundCategory = jsonData.find((cat) => cat.name === categoryValue);
+    if(foundCategory){
+      setcategoryslug(foundCategory.slug);
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
+      const temp = foundCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+      seturlslug(temp);
+    }
     // Reset subcategory and additional fields when category changes
     setSelectedSubCategory('');
     setAdditionalFields({});
@@ -19,6 +28,18 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const handleSubCategoryChange = (event) => {
     const subCategoryValue = event.target.value;
     setSelectedSubCategory(subCategoryValue);
+    const foundCategory = jsonData.find((cat) => cat.name === selectedCategory);
+    if(foundCategory){
+      const subCategories = foundCategory.subCategories;
+      const subCategory = subCategories.find((subcat) => subcat.name === subCategoryValue);
+      if(subCategory){
+        setcategoryslug(subCategory.slug);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
+        const temp = subCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+        seturlslug(temp);
+      }
+    }
     setAdditionalFields({});
   };
 
@@ -37,10 +58,13 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   };
 
   const handleSubmit = () => {
+    console.log("categoryslug+++", categoryslug);
     onSubmitCategory(
       clearedInterview,
       selectedCategory,
       selectedSubCategory,
+      categoryslug,
+      urlslug,
       additionalFields,
     );
   };
