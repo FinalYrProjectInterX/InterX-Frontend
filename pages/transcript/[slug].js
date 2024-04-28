@@ -74,7 +74,7 @@ const detailPage = ({user, logout, transcript}) => {
 export default detailPage
 
 export async function getServerSideProps(context){
-  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/get_transcript_by_url_slug`, {
+  const response = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/transcripts/get_transcript_by_url_slug`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

@@ -142,7 +142,7 @@ const contribute = ({ user, logout }) => {
       const formData = new FormData();
       formData.append('image', file);
       console.log(formData);
-      const response = await fetch(`http://localhost:3000/api/upload`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/upload`, {
         method: 'POST',
         ContentType:"multipart/form-data",
         body: formData,
@@ -151,7 +151,7 @@ const contribute = ({ user, logout }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Image uploaded:', data.image);
-        const response2 = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/create_transcript`, {
+        const response2 = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/transcripts/create_transcript`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
@@ -245,7 +245,7 @@ const contribute = ({ user, logout }) => {
   };
 
   const handleGetImageClick=(image)=>{
-    fetch(`http://localhost:3000/api/getImage?filename=${image}`)
+    fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getImage?filename=${image}`)
       .then((response) => response.blob())
       .then((blob) => {
         console.log(blob)
@@ -276,9 +276,9 @@ const contribute = ({ user, logout }) => {
           enim? Rem obcaecati in eos.
         </p>
       </div>
-      {/* <div className="">
-        <button onClick={(event)=>{event.preventDefault();handleGetImageClick("");}}>View Image</button>
-      </div> */}
+      <div className="">
+        <button onClick={(event)=>{event.preventDefault();handleGetImageClick("image-1714307113329-880286944");}}>View Image</button>
+      </div>
       <div className="" style={{ display: categorySubmitFormDisplay }}>
         <CategorySubmitForm onSubmitCategory={onSubmitCategory} />
       </div>
