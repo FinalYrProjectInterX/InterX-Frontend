@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const { filename } = req.query;
 
   // Construct the path to the image file
-  const filePath = path.join(process.cwd(), 'public', 'uploads', filename);
+  const filePath = path.join(require('os').tmpdir(), filename);
 
   // Read the image file
   fs.readFile(filePath, (err, data) => {
