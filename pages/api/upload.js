@@ -3,7 +3,7 @@ import connectDb from '@/middleware/mongoose';
 import Image from '@/models/Image.js';
 // Set up multer storage
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: require('os').tmpdir(),
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     cb(null, file.fieldname  + '-' + uniqueSuffix);

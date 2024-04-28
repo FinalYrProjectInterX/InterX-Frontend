@@ -246,7 +246,7 @@ const contribute = ({ user, logout }) => {
   };
 
   const handleGetImageClick=(image)=>{
-    fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getImage?filename=${image}`)
+    fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getImage?filename=image-1714325266150-444153858`)
       .then((response) => response.blob())
       .then((blob) => {
         console.log(blob)
