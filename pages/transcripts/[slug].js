@@ -14,6 +14,8 @@ const Transcripts = ({user, logout, transcripts}) => {
   console.log(transcripts);
   const router = useRouter();
   const { slug } = router.query;
+  // console.log("question", transcripts[2].questions_answers[0].Question);
+  // console.log("answer", transcripts[2].questions_answers[0].Answer);
   // console.log("slug", slug);
 
   return (

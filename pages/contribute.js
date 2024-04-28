@@ -33,6 +33,7 @@ const contribute = ({ user, logout }) => {
     useState("block");
   const [QAFormDisplay, setQAFormDisplay] = useState("none");
   const [AdditionalInfoDisplay, setAdditionalInfoDisplay] = useState("none");
+  const [ImageProofDisplay, setImageProofDisplay] = useState("none");
   const [tips, settips] = useState("");
   const [experience, setexperience] = useState("");
   const [additionalInfo, setadditionalInfo] = useState("");
@@ -56,6 +57,8 @@ const contribute = ({ user, logout }) => {
   const [token, settoken] = useState("");
   const [categorySlug, setcategoryslug] = useState("");
   const [urlSlug, seturlSlug] = useState("");
+  const [imageUrl, setImageUrl] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   // const onSubmitPersonalInfo = (name, contact, email, degree) => {
   //   setname(name);
@@ -109,6 +112,7 @@ const contribute = ({ user, logout }) => {
     setcategorySubmitFormDisplay("none");
     setQAFormDisplay("none");
     setAdditionalInfoDisplay("block");
+    setImageProofDisplay("none");
   };
 
   const onSubmitAdditionalInfo = async(experience, tips, additionalInfo) => {
@@ -121,58 +125,113 @@ const contribute = ({ user, logout }) => {
     setexperience(experience);
     setcategorySubmitFormDisplay("none");
     setQAFormDisplay("none");
-    setAdditionalInfoDisplay("block");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/create_transcript`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        token: token,
-        interview_name: clearedInterview,
-        category: category,
-        subCategory: subCategory,
-        optional_subject: optionalSubject?optionalSubject:"",
-        gap_years: gapYears?gapYears:"",
-        year_of_interview: InterviewYear?InterviewYear:"",
-        specialization: specialization?specialization:"",
-        work_experience: workExperience?workExperience:"",
-        exam_scores: catScore?catScore:"",
-        visa_type: visaType?visaType:"",
-        country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
-        purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
-        programming_languages: programmingLanguages?programmingLanguages:"",
-        tech_stack_used: techStackUsed?techStackUsed:"",
-        branch: branch?branch:"",
-        commision_type: commissionType?commissionType:"",
-        bank_name: bankName?bankName:"",
-        interview_experience: experience?experience:"",
-        interview_tips: tips?tips:"",
-        additional_info: additionalInfo?additionalInfo:"",
-        rating: 0,
-        category_slug: categorySlug?categorySlug:"",
-        slug: urlSlug?urlSlug:"",
-        status: "Pending",
-        questions_answers: quesans
-      })
-    });
-    console.log("response+++", response);
-    const JSONdata = await response.json();
-    console.log("JSONdata+++", JSONdata);
-    if (response.status==200) {
-      toast.success("Transcript Created Successfully!!", {
-        position: "top-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    setAdditionalInfoDisplay("none");
+    setImageProofDisplay("block");
+  };
+
+  const [file, setFile] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
+  const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      console.log(formData);
+      const response = await fetch(`http://localhost:3000/api/upload`, {
+        method: 'POST',
+        ContentType:"multipart/form-data",
+        body: formData,
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Image uploaded:', data.image);
+        const response2 = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/create_transcript`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            token: token,
+            interview_name: clearedInterview,
+            category: category,
+            subCategory: subCategory,
+            optional_subject: optionalSubject?optionalSubject:"",
+            gap_years: gapYears?gapYears:"",
+            year_of_interview: InterviewYear?InterviewYear:(admissionYear?admissionYear:""),
+            specialization: specialization?specialization:"",
+            work_experience: workExperience?workExperience:"",
+            exam_scores: catScore?catScore:"",
+            visa_type: visaType?visaType:"",
+            country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
+            purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
+            programming_languages: programmingLanguages?programmingLanguages:"",
+            tech_stack_used: techStackUsed?techStackUsed:"",
+            branch: branch?branch:"",
+            commision_type: commissionType?commissionType:"",
+            bank_name: bankName?bankName:"",
+            interview_experience: experience?experience:"",
+            interview_tips: tips?tips:"",
+            additional_info: additionalInfo?additionalInfo:"",
+            rating: 0,
+            category_slug: categorySlug?categorySlug:"",
+            slug: urlSlug?urlSlug:"",
+            status: "Pending",
+            image_proof: data.image.filename,
+            questions_answers: quesans
+          })
+        });
+        console.log("response2+++", response2);
+        const JSONdata = await response2.json();
+        console.log("JSONdata+++", JSONdata);
+        if (response2.status==200) {
+          toast.success("Transcript Created Successfully!!", {
+            position: "top-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+        else{
+          toast.error("Some Error Occured!!", {
+            position: "top-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      } else {
+        toast.error("Image upload failed!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+      setcategorySubmitFormDisplay("none");
+      setQAFormDisplay("none");
+      setAdditionalInfoDisplay("none");
+      setImageProofDisplay("block");
     }
     else{
-      toast.error("Some Error Occured!!", {
+      toast.error("Please Submit the Proof first!!", {
         position: "top-left",
         autoClose: 3000,
         hideProgressBar: false,
@@ -184,6 +243,21 @@ const contribute = ({ user, logout }) => {
       });
     }
   };
+
+  const handleGetImageClick=(image)=>{
+    fetch(`http://localhost:3000/api/getImage?filename=${image}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        console.log(blob)
+        const imageURL = URL.createObjectURL(blob);
+        console.log(imageURL);
+        setImageUrl(imageURL);
+        setShowModal(true);
+      })
+      .catch((error) => {
+        console.error('Error fetching image:', error);
+      });
+  }
 
   return (
     <>
@@ -202,6 +276,9 @@ const contribute = ({ user, logout }) => {
           enim? Rem obcaecati in eos.
         </p>
       </div>
+      {/* <div className="">
+        <button onClick={(event)=>{event.preventDefault();handleGetImageClick("");}}>View Image</button>
+      </div> */}
       <div className="" style={{ display: categorySubmitFormDisplay }}>
         <CategorySubmitForm onSubmitCategory={onSubmitCategory} />
       </div>
@@ -211,7 +288,32 @@ const contribute = ({ user, logout }) => {
       <div className="" style={{ display: AdditionalInfoDisplay }}>
         <AdditionalInfo onSubmitAdditionalInfo={onSubmitAdditionalInfo} />
       </div>
+      <div className="" style={{ display: ImageProofDisplay }}>
+      <div className=" flex flex-col items-center justify-center">
+        <div className="mb-4 mt-8  text-black w-1/2 ">
+          <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
+            Upload Proof
+          </label>
+          <input type="file" name="fileupload" onChange={handleFileChange} />
+        </div>
+          <button
+            className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-85 z-50">
+          <div className="relative max-w-full max-h-full">
+            <button className="text-white" onClick={() => setShowModal(false)}>Close</button>
+            <img src={imageUrl} alt="Uploaded image" className="w-[80vw] h-[85vh]" />
+          </div>
+        </div>
+      )}
     </div>
+
     <div className="mt-32">
       <Footer/>
     </div>

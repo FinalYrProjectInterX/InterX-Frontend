@@ -25,7 +25,7 @@ const Navbar = ({user, logout}) => {
         </button>}
         {dropdown && <div className='absolute shadow-md top-14 right-2 ease-out duration-100 bg-white text-black px-4 py-4 my-3 z-50 text-center' onMouseMove={(event)=>{event.preventDefault();setdropdown(true)}} onMouseLeave={(event)=>{event.preventDefault();setdropdown(false)}}>
           <ul>
-            <Link href="/orders" className="text-sm font-medium hover:text-black"><li className='hover:bg-gray-100 my-2'>Your Profile</li></Link>  
+            <Link href="/profile" className="text-sm font-medium hover:text-black"><li className='hover:bg-gray-100 my-2'>Your Profile</li></Link>  
             <button className="text-sm font-medium hover:bg-gray-100 hover:text-black" onClick={(event)=>{event.preventDefault();logout();setdropdown(false)}}><li>Logout</li></button>
           </ul>
         </div>}
