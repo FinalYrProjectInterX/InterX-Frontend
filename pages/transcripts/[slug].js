@@ -53,7 +53,8 @@ const Transcripts = ({user, logout, transcripts}) => {
 export default Transcripts
 
 export async function getServerSideProps(context){
-  const response = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+  console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

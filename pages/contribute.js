@@ -151,7 +151,8 @@ const contribute = ({ user, logout }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Image uploaded:', data.image);
-        const response2 = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/transcripts/create_transcript`, {
+        console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+        const response2 = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/create_transcript`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"

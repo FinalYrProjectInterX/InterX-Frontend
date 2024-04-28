@@ -24,7 +24,7 @@ const signup = ({user, logout}) => {
       about: "",
       password: password
     }));
-    const response = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/signup/`,{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/signup/`,{
       method:"POST",
       headers: {
         "Content-Type": "application/json"

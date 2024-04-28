@@ -30,7 +30,7 @@ const login = ({user, logout}) => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     console.log("Login Successfully.");
-    const response = await fetch(`${process.env.FASTAPI_PUBLIC_HOST}/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/login`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
