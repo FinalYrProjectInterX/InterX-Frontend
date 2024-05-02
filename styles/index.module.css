@@ -1,5 +1,11 @@
 .blockstyle{
-  background: #ffffff36;
+  background-image: linear-gradient(rgba(53, 54, 111, 1),rgba(224, 222, 242, 0.6));
   padding: 17px;
-  border-radius: 9px;
+  border-radius: 20px;
+}
+.himani{
+  background-image: url("../public/Desktop\ -\ 8.png");
+  background-size:100vw 100%;
+  background-position:center;
+  background-repeat:no-repeat;
 }

@@ -31,3 +31,16 @@ body {
     text-wrap: balance;
   }
 }
+.sujal{
+  background-image: url("../public/2.jpg");
+  background-size:100vw 100%;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+.hs{
+  background-image: url("../public/Desktop\ -\ 8.png");
+  background-size:10vw 10%;
+  background-position:center;
+  background-repeat:no-repeat;
+}
