@@ -24,7 +24,7 @@ const login = ({user}) => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     // console.log("Login Successfully.");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/admin/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/admin/login`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
