@@ -5,21 +5,20 @@ import CategorySubmitForm from "@/components/CategorySubmitForm";
 import QAForm from "@/components/QAForm";
 import { useRouter } from "next/router";
 import AdditionalInfo from "@/components/AdditionalInfo";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "@/components/Footer";
 
 const contribute = ({ user, logout }) => {
   const router = useRouter();
 
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
-      router.push('/signup');
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      router.push("/signup");
+    } else {
+      settoken(JSON.parse(localStorage.getItem("token")));
     }
-    else{
-      settoken(JSON.parse(localStorage.getItem('token')));
-    }
-  },[])
+  }, []);
 
   // const [name, setname] = useState('');
   // const [contact, setcontact] = useState('');
@@ -73,7 +72,14 @@ const contribute = ({ user, logout }) => {
   //   setQAFormDisplay("none");
   // }
 
-  const onSubmitCategory = (clearedInterview, category, subCategory, categorySlug, urlSlug, additionalFields) => {
+  const onSubmitCategory = (
+    clearedInterview,
+    category,
+    subCategory,
+    categorySlug,
+    urlSlug,
+    additionalFields
+  ) => {
     console.log("clearedInterview", clearedInterview);
     console.log("category", category);
     console.log("subCategory", subCategory);
@@ -115,7 +121,7 @@ const contribute = ({ user, logout }) => {
     setImageProofDisplay("none");
   };
 
-  const onSubmitAdditionalInfo = async(experience, tips, additionalInfo) => {
+  const onSubmitAdditionalInfo = async (experience, tips, additionalInfo) => {
     console.log("tips++", tips);
     console.log("additionalInfo++", additionalInfo);
     console.log("experience++", experience);

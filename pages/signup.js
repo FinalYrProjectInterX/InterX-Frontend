@@ -73,7 +73,7 @@ const signup = ({user, logout}) => {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="min-h-screen">
       <ToastContainer />
       <Navbar user={user} logout={logout}/>
       <div className="pt-32 h-[90vh]">

@@ -62,7 +62,7 @@ const login = ({user, logout}) => {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="min-h-screen">
       <ToastContainer />
       <Navbar user={user} logout={logout}/>
       <div className='flex flex-col items-center justify-center h-[85vh]'>
