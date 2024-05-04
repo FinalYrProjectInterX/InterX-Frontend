@@ -12,6 +12,7 @@ const index = ({user, logout, transcripts}) => {
   return (
     <div>
       <Navbar user={user} logout={logout} />
+      
     </div>
   )
 }
@@ -19,7 +20,7 @@ const index = ({user, logout, transcripts}) => {
 export default index
 
 export async function getServerSideProps(context){
-  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/transcripts/get_transcripts_by_status`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_status`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
