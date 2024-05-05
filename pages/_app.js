@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }) {
   const logout=async()=>{
     setuser({value:null});
     localStorage.removeItem('token');
+    localStorage.removeItem('admin');
   }
 
   return <Component user={user} logout={logout} {...pageProps} />;

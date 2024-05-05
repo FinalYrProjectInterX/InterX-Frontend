@@ -59,7 +59,7 @@
   },
   {
     "id": 3,
-    "name": "Visa Interview",
+    "name": "VISA",
     "description": "Interviews for Visa application - Immigration assessment process",
     "slug":"visa-interview",
     "subCategories": []

@@ -8,12 +8,16 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const [additionalFields, setAdditionalFields] = useState({});
   const [categoryslug, setcategoryslug] = useState('');
   const [urlslug, seturlslug] = useState('');
+  const [interviewMode, setinterviewMode] = useState('');
+  const [otherInfo, setotherInfo] = useState('');
+  const [controlDisplay, setcontrolDisplay] = useState("none");
 
   const handleCategoryChange = (event) => {
     const categoryValue = event.target.value;
     setSelectedCategory(categoryValue);
     const foundCategory = jsonData.find((cat) => cat.name === categoryValue);
     if(foundCategory){
+      setcontrolDisplay("block");
       setcategoryslug(foundCategory.slug);
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
@@ -66,6 +70,8 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       categoryslug,
       urlslug,
       additionalFields,
+      interviewMode,
+      otherInfo
     );
   };
 
@@ -126,15 +132,25 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     return null;
   };
 
+  const handleInterviewModeChange = (event) => {
+    event.preventDefault();
+    setinterviewMode(event.target.value);
+  }
+
+  const handleOtherInformationChanges = (event) => {
+    event.preventDefault();
+    setotherInfo(event.target.value);
+  }
+
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className="mb-4 text-black w-1/2">
-        <label htmlFor="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Enter the Name of Examination/Interview which you have cleared...</label>
+        <label htmlFor="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Enter the name of the interview you attended or the institute you interviewed with...</label>
         <input
           type="text"
           id="name"
           className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          placeholder="Exam/Interview name"
+          placeholder="Exam/Institute name"
           onChange={handleClearedInterviewChange}
           required
         />
@@ -159,6 +175,34 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
 
       {/* Render additional fields based on selected category and subcategory */}
       {renderAdditionalFields()}
+
+      <div className="mb-4 mt-8 text-black w-1/2" style={{ display: controlDisplay }}>
+        <select
+          className='shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+          value={interviewMode}
+          onChange={handleInterviewModeChange}
+        >
+          <option value="">Select Interview Mode</option>
+          <option value="Offline">
+            Offline
+          </option>
+          <option value="Offline">
+            Online
+          </option>
+        </select>
+      </div>
+
+      <div className="mb-4 text-black w-1/2" style={{ display: controlDisplay }}>
+        <label htmlFor="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Other information about your profile</label>
+        <input
+          type="text"
+          id="name"
+          className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Engineer / Computer Science / EWS Category / Online mode"
+          onChange={handleOtherInformationChanges}
+          required
+        />
+      </div>
 
       <button
         className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

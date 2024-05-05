@@ -56,6 +56,8 @@ const contribute = ({ user, logout }) => {
   const [token, settoken] = useState("");
   const [categorySlug, setcategoryslug] = useState("");
   const [urlSlug, seturlSlug] = useState("");
+  const [interviewMode, setinterviewMode] = useState('');
+  const [otherInfo, setotherInfo] = useState('');
   const categoryAdditionalFields = {
     UPSC: ['Optional Subject', 'Gap Years', 'Marks', 'Year of Interview'],
     MBA: ['Specialization', 'Work Experience', 'CAT/GMAT Score','Year of Admission'],
@@ -83,13 +85,15 @@ const contribute = ({ user, logout }) => {
     subCategory,
     categorySlug,
     urlSlug,
-    additionalFields
+    additionalFields,
+    interviewMode,
+    otherInfo
   ) => {
     console.log("clearedInterview", clearedInterview);
     console.log("category", category);
     console.log("subCategory", subCategory);
     console.log("additionalFields", additionalFields);
-    if(clearedInterview=="" || category=="" || subCategory==""){
+    if(clearedInterview=="" || category=="" || interviewMode=="" || otherInfo==""){
       toast.error("Values for all fields are required, Please fill them!!", {
         position: "top-left",
         autoClose: 3000,
@@ -139,6 +143,8 @@ const contribute = ({ user, logout }) => {
     setbranch(additionalFields["Branch"]);
     setcomissionType(additionalFields["Commission Type"]);
     setbankName(additionalFields["Bank Name"]);
+    setotherInfo(otherInfo);
+    setinterviewMode(interviewMode);
     setcategorySubmitFormDisplay("none");
     setQAFormDisplay("block");
     setAdditionalInfoDisplay("none");
@@ -218,9 +224,12 @@ const contribute = ({ user, logout }) => {
             interview_experience: experience?experience:"",
             interview_tips: tips?tips:"",
             additional_info: additionalInfo?additionalInfo:"",
+            other_profile_info: otherInfo?otherInfo:"",
+            interview_mode: interviewMode?interviewMode:"",
             rating: 0,
             category_slug: categorySlug?categorySlug:"",
             slug: urlSlug?urlSlug:"",
+            service_name: serviceName?serviceName:"",
             status: "Pending",
             image_proof: data.image.filename,
             questions_answers: quesans
@@ -284,39 +293,49 @@ const contribute = ({ user, logout }) => {
     }
   };
 
+  const handleBackFromQA = () => {
+    setcategorySubmitFormDisplay("block");
+    setQAFormDisplay("none");
+    setAdditionalInfoDisplay("none");
+    setImageProofDisplay("none");
+  }
+
+  const handleBackFromExperience = () => {
+    setcategorySubmitFormDisplay("none");
+    setQAFormDisplay("block");
+    setAdditionalInfoDisplay("none");
+    setImageProofDisplay("none");
+  }
+
   return (
     <>
     <div className="h-auto">
       <ToastContainer />
       <Navbar user={user} logout={logout} />
-      <div className="flex flex-col items-start justify-center my-12 mx-40">
+      <div className="flex flex-col items-center justify-center my-12 mx-40">
         <p className="text-4xl my-2">
-          Thanks for Giving your time to Share your interview experience with
-          us!!
+          Thanks for adding value to millions of interviewees!!
         </p>
-        <p className="text-xl my-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
-          nostrum! Minima veritatis velit asperiores fugit provident, dolore
-          rerum quam, commodi cum saepe possimus id incidunt laborum. Quas,
-          enim? Rem obcaecati in eos.
+        <p className="text-xl my-2 text-center">
+        Fill out the details of your profile at the time of the interview for other aspirants to filter out this transcripts very easily
         </p>
       </div>
       <div className="" style={{ display: categorySubmitFormDisplay }}>
         <CategorySubmitForm onSubmitCategory={onSubmitCategory} />
       </div>
       <div className="" style={{ display: QAFormDisplay }}>
-        <QAForm onSubmit={onSubmit} />
+        <QAForm onSubmit={onSubmit} handleBackFromQA={handleBackFromQA}/>
       </div>
       <div className="" style={{ display: AdditionalInfoDisplay }}>
-        <AdditionalInfo onSubmitAdditionalInfo={onSubmitAdditionalInfo} />
+        <AdditionalInfo onSubmitAdditionalInfo={onSubmitAdditionalInfo} handleBackFromExperience={handleBackFromExperience}/>
       </div>
       <div className="" style={{ display: ImageProofDisplay }}>
       <div className=" flex flex-col items-center justify-center">
-        <div className="mb-4 mt-8  text-black w-1/2 ">
+        <div className="mb-4 mt-8  text-white w-1/2 ">
           <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
-            Upload Proof
+            Upload Proof of Interview(Email ScreenShot/ Call Letter)
           </label>
-          <input type="file" name="fileupload" onChange={handleFileChange}/>
+          <input type="file" name="fileupload" onChange={handleFileChange} className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
         </div>
           <button
             className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

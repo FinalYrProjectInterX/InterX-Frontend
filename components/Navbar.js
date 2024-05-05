@@ -61,7 +61,7 @@ const Navbar = ({ user, logout }) => {
           >
             <ul>
               <Link
-                href="/orders"
+                href="/profile"
                 className="text-sm font-medium hover:text-black"
               >
                 <li className="hover:bg-gray-100 my-2">Your Profile</li>

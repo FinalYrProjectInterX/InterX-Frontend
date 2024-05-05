@@ -2,7 +2,6 @@ import Navbar from '@/components/Navbar'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from "next/link";
-import { MongoClient } from 'mongodb';
 import indexStyle from "../../styles/index.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie } from "@fortawesome/free-solid-svg-icons";
@@ -178,7 +177,7 @@ const index = ({user, logout, transcripts}) => {
                   className="text-white focus:outline-none"
                   onClick={(event) => {event.preventDefault();handleApproveTranscript(transcript._id);}}
                 >
-                  Accept
+                  Approve
                 </button>
                 <button
                   className="text-white focus:outline-none"
@@ -213,17 +212,22 @@ const index = ({user, logout, transcripts}) => {
 export default index
 
 export async function getServerSideProps(context){
-  const client = new MongoClient(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_status`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      status: "pending"
+    }),
   });
-  await client.connect();
-  const db = client.db('Interx');
-  const collection = db.collection('transcripts');
-  const query = { status: 'Pending' };
-  const transcripts = await collection.find(query).toArray();
-  await client.close();
+  let transcripts = [];
+  console.log("response++", response);
+  if(response.status==200){
+    transcripts = await response.json();
+  }
+  console.log("transcripts++", transcripts);
   return{
-    props:{transcripts: JSON.parse(JSON.stringify(transcripts))}
+    props:{transcripts: transcripts}
   }
 }

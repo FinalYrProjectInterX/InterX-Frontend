@@ -10,7 +10,7 @@ import SearchBar from "../../components/SearchBar";
 import Footer from "@/components/Footer";
 import mongoose from "mongoose";
 import InterviewTranscript from "@/models/InterviewTranscript";
-import { MongoClient } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 
 const Transcripts = ({ user, logout, transcripts }) => {
   console.log(transcripts);
@@ -51,7 +51,7 @@ const Transcripts = ({ user, logout, transcripts }) => {
       {name: 'Year of Interview',apiname:'year_of_interview'}
     ],
     'Indian Armed Forces': [
-      {name: 'Service Name',apiname:'serviceName'},
+      {name: 'Service Name',apiname:'service_name'},
       {name: 'Branch',apiname:'branch'},
       {name: 'Commission Type',apiname:'commision_type'},
       {name: 'Year of Interview',apiname:'year_of_interview'}
@@ -134,34 +134,34 @@ const Transcripts = ({ user, logout, transcripts }) => {
 export default Transcripts;
 
 export async function getServerSideProps(context){
-  // console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
-  //   method: 'POST',
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify({
-  //     category_slug: context.query.slug
-  //   }),
-  // });
-  // let transcripts = [];
-  // if(response.status==200){
-  //   transcripts = await response.json();
-  // }
-  const client = new MongoClient(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category_slug: context.query.slug
+    }),
   });
-  await client.connect();
-  const db = client.db('Interx');
-  // console.log(db);
-  const collection = db.collection('transcripts');
-  // console.log(collection);
-  const query = { category_slug: context.query.slug };
-  const transcripts = await collection.find(query).toArray();
-  // console.log(transcripts);
-  await client.close();
+  let transcripts = [];
+  if(response.status==200){
+    transcripts = await response.json();
+  }
+  // const client = new MongoClient(process.env.MONGODB_URI, {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  // });
+  // await client.connect();
+  // const db = client.db('Interx');
+  // // console.log(db);
+  // const collection = db.collection('transcripts');
+  // // console.log(collection);
+  // const query = { category_slug: context.query.slug };
+  // const transcripts = await collection.find(query).toArray();
+  // // console.log(transcripts);
+  // await client.close();
   return{
-    props:{transcripts: JSON.parse(JSON.stringify(transcripts))}
+    props:{transcripts: transcripts}
   }
 }
