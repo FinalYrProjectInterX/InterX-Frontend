@@ -26,7 +26,7 @@ const SubCategoryBlock = ({ item }) => {
 const DynamicCategories = ({ user, logout }) => {
   const router = useRouter();
   const [subCategories, setsubCategories] = useState([]);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       const { slug } = router.query;

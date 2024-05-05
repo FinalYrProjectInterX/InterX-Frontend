@@ -2,6 +2,7 @@
   background-image: linear-gradient(rgba(53, 54, 111, 1),rgba(224, 222, 242, 0.6));
   padding: 17px;
   border-radius: 20px;
+  border: 2px solid white;
 }
 .himani{
   background-image: url("../public/Desktop\ -\ 8.png");

@@ -39,6 +39,7 @@ const login = ({user}) => {
     console.log("JSONdata++", JSONdata);
     if (response.status==200) {
       localStorage.setItem('token', JSON.stringify(JSONdata.authToken));
+      localStorage.setItem('admin', 'true');
       user.value = JSONdata.authToken;
       router.push("/admin/");
     }
@@ -57,7 +58,7 @@ const login = ({user}) => {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="min-h-screen">
       <ToastContainer />
       <div className='flex flex-col items-center justify-center h-screen'>
         <div className="mb-4 text-black w-1/2">

@@ -10,14 +10,59 @@ import SearchBar from "../../components/SearchBar";
 import Footer from "@/components/Footer";
 import mongoose from "mongoose";
 import InterviewTranscript from "@/models/InterviewTranscript";
+import { MongoClient } from 'mongodb';
 
 const Transcripts = ({ user, logout, transcripts }) => {
   console.log(transcripts);
   const router = useRouter();
   const { slug } = router.query;
-  // console.log("question", transcripts[2].questions_answers[0].Question);
-  // console.log("answer", transcripts[2].questions_answers[0].Answer);
-  // console.log("slug", slug);
+  const [additionalFields, setadditionalFields] = useState([]);
+
+  useEffect(()=>{
+    const category = transcripts[0].category;
+    console.log('category++', category);
+    setadditionalFields(categoryAdditionalFields[category]);
+    // console.log('additionalFields++', additionalFields);
+  }, [])
+
+  const categoryAdditionalFields = {
+    'UPSC': [
+      {name: 'Optional Subject',apiname:'optional_subject'},
+      {name: 'Gap Years',apiname:'gap_years'},
+      {name: 'Marks',apiname:'exam_scores'},
+      {name: 'Year of Interview',apiname:'year_of_interview'}
+    ],
+    'MBA': [
+      {name: 'Specialization',apiname:'specialization'},
+      {name: 'Work Experience',apiname:'work_experience'},
+      {name: 'CAT/GMAT Score',apiname:'exam_scores'},
+      {name: 'Year of Admission',apiname:'year_of_interview'}
+    ],
+    'VISA': [
+      {name: 'VISA Type',apiname:'visa_type'},
+      {name: 'Country Applied for VISA',apiname:'country_applied_for_visa'},
+      {name: 'Purpose of Travel',apiname:'purpose_of_travel'},
+      {name: 'Year of Interview',apiname:'year_of_interview'}
+    ],
+    'Coding & Technical': [
+      {name: 'Programming Languages',apiname:'programming_languages'},
+      {name: 'Tech Stack Used',apiname:'tech_stack_used'},
+      {name: 'Work Experience',apiname:'work_experience'},
+      {name: 'Year of Interview',apiname:'year_of_interview'}
+    ],
+    'Indian Armed Forces': [
+      {name: 'Service Name',apiname:'serviceName'},
+      {name: 'Branch',apiname:'branch'},
+      {name: 'Commission Type',apiname:'commision_type'},
+      {name: 'Year of Interview',apiname:'year_of_interview'}
+    ],
+    'Bank PO': [
+      {name: 'Bank Name',apiname:'bankName'},
+      {name: 'Work Experience',apiname:'work_experience'},
+      {name: 'Year of Interview',apiname:'year_of_interview'}
+    ]
+  };
+
   const handleReadMoreClick = (transcriptSlug) => {
     router.push(`/transcript/${transcriptSlug}`);
   };
@@ -40,47 +85,38 @@ const Transcripts = ({ user, logout, transcripts }) => {
         </div>
       </div>
       <div className="flex mx-20 my-10 justify-center">
-        <div className="grid grid-cols-3 gap-8 mx-20 my-20">
+        <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
           {transcripts.map((transcript) => (
             <Link
               key={transcript._id}
               href={`/transcript/${transcript.slug}`}
               className={`flex flex-col items-center ${indexStyle.blockstyle}`}
             >
-              <dt className="mt-4 font-semibold text-2xl text-center ">
+              <dt className="mt-4 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
                 {transcript.interview_name}
               </dt>
-              <div className="justify-start">
-                <dd className="mt-2  font-semibold text-xl ">
-                  <FontAwesomeIcon
+              <div className="flex flex-col items-center justify-between w-full">
+                <dd className="mt-2 font-semibold text-xl flex flex-row justify-between w-full">
+                  <span className="w-1/2"><FontAwesomeIcon
                     icon={faUserTie}
-                    className="mr-2 "
-                    size="lg"
+                    className="mr-2"
+                    size="xl"
                     style={{ color: "black" }}
-                  />
-                  {transcript.user_id}
+                  /></span>
+                  <span className="w-2/5">
+                  {transcript.user_name}
+                  </span>
                 </dd>
-                <dd className="mt-2 leading-7  text-white">
-                  <span>Year:</span>
-                  <span>{transcript.year_of_interview}</span>
-                </dd>
-                <dd className="mt-2 leading-7  text-white">
-                  {transcript.questions_answers &&
-                  transcript.questions_answers.length > 0 ? (
-                    <div className="">
-                      <strong>Question:</strong>{" "}
-                      <span>{transcript.questions_answers[0].Question}</span>
-                    </div>
-                  ) : (
-                    <div className="">
-                      <strong>Question:</strong> No questions available
-                    </div>
-                  )}
-                </dd>
+                {additionalFields.map((item) => (
+                  <dd className="mt-2 leading-7 flex flex-row justify-between w-full">
+                    <span className="w-1/2 text-black">{item.name}</span>
+                    <span className="w-2/5 text-white ">{transcript[item.apiname]?transcript[item.apiname]:""}</span>
+                  </dd>
+                ))}
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-6">
                 <button
-                  className="text-white focus:outline-none  "
+                  className="text-white focus:outline-none"
                   onClick={() => handleReadMoreClick(transcript.slug)}
                 >
                   Read More
@@ -98,23 +134,34 @@ const Transcripts = ({ user, logout, transcripts }) => {
 export default Transcripts;
 
 export async function getServerSideProps(context){
-  console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
-  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      category_slug: context.query.slug
-    }),
+  // console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+  // const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+  //   method: 'POST',
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify({
+  //     category_slug: context.query.slug
+  //   }),
+  // });
+  // let transcripts = [];
+  // if(response.status==200){
+  //   transcripts = await response.json();
+  // }
+  const client = new MongoClient(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
-  // console.log("response+++", response);
-  let transcripts = [];
-  if(response.status==200){
-    transcripts = await response.json();
-  }
-  // console.log("transcripts+++", transcripts);
+  await client.connect();
+  const db = client.db('Interx');
+  // console.log(db);
+  const collection = db.collection('transcripts');
+  // console.log(collection);
+  const query = { category_slug: context.query.slug };
+  const transcripts = await collection.find(query).toArray();
+  // console.log(transcripts);
+  await client.close();
   return{
-    props:{transcripts: transcripts}
+    props:{transcripts: JSON.parse(JSON.stringify(transcripts))}
   }
 }

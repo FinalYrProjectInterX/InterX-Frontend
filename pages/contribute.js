@@ -56,9 +56,14 @@ const contribute = ({ user, logout }) => {
   const [token, settoken] = useState("");
   const [categorySlug, setcategoryslug] = useState("");
   const [urlSlug, seturlSlug] = useState("");
-  const [imageUrl, setImageUrl] = useState('');
-  const [showModal, setShowModal] = useState(false);
-
+  const categoryAdditionalFields = {
+    UPSC: ['Optional Subject', 'Gap Years', 'Marks', 'Year of Interview'],
+    MBA: ['Specialization', 'Work Experience', 'CAT/GMAT Score','Year of Admission'],
+    VISA: ['VISA Type', 'Country Applied for VISA', 'Purpose of Travel','Year of Interview'],
+    'Coding & Technical': ['Programming Languages', 'Tech Stack Used', 'Work Experience' ,'Year of Interview'],
+    'Indian Armed Forces': ['Service Name', 'Branch', 'Commission Type','Year of Interview'],
+    'Bank PO': ['Bank Name', 'Work Experience', 'Year of Interview'],
+  };
   // const onSubmitPersonalInfo = (name, contact, email, degree) => {
   //   setname(name);
   //   setcontact(contact);
@@ -84,6 +89,34 @@ const contribute = ({ user, logout }) => {
     console.log("category", category);
     console.log("subCategory", subCategory);
     console.log("additionalFields", additionalFields);
+    if(clearedInterview=="" || category=="" || subCategory==""){
+      toast.error("Values for all fields are required, Please fill them!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    const requiredFields = categoryAdditionalFields[category] || [];
+    const missingFields = requiredFields.filter(field => !additionalFields[field]);
+    if (missingFields.length > 0) {
+      toast.error(`Please fill out all required fields for ${category} category: ${missingFields.join(', ')}`, {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
     setcategoryslug(categorySlug);
     seturlSlug(urlSlug);
     setclearedInterview(clearedInterview);
@@ -173,7 +206,7 @@ const contribute = ({ user, logout }) => {
             year_of_interview: InterviewYear?InterviewYear:(admissionYear?admissionYear:""),
             specialization: specialization?specialization:"",
             work_experience: workExperience?workExperience:"",
-            exam_scores: catScore?catScore:"",
+            exam_scores: catScore?catScore:(marks?marks:""),
             visa_type: visaType?visaType:"",
             country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
             purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
@@ -251,21 +284,6 @@ const contribute = ({ user, logout }) => {
     }
   };
 
-  const handleGetImageClick=(image)=>{
-    fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getImage?filename=image-1714325266150-444153858`)
-      .then((response) => response.blob())
-      .then((blob) => {
-        console.log(blob)
-        const imageURL = URL.createObjectURL(blob);
-        console.log(imageURL);
-        setImageUrl(imageURL);
-        setShowModal(true);
-      })
-      .catch((error) => {
-        console.error('Error fetching image:', error);
-      });
-  }
-
   return (
     <>
     <div className="h-auto">
@@ -283,9 +301,6 @@ const contribute = ({ user, logout }) => {
           enim? Rem obcaecati in eos.
         </p>
       </div>
-      <div className="">
-        <button onClick={(event)=>{event.preventDefault();handleGetImageClick("image-1714307113329-880286944");}}>View Image</button>
-      </div>
       <div className="" style={{ display: categorySubmitFormDisplay }}>
         <CategorySubmitForm onSubmitCategory={onSubmitCategory} />
       </div>
@@ -301,7 +316,7 @@ const contribute = ({ user, logout }) => {
           <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
             Upload Proof
           </label>
-          <input type="file" name="fileupload" onChange={handleFileChange} />
+          <input type="file" name="fileupload" onChange={handleFileChange}/>
         </div>
           <button
             className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -311,14 +326,14 @@ const contribute = ({ user, logout }) => {
           </button>
         </div>
       </div>
-      {showModal && (
+      {/* {showModal && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-85 z-50">
           <div className="relative max-w-full max-h-full">
             <button className="text-white" onClick={() => setShowModal(false)}>Close</button>
             <img src={imageUrl} alt="Uploaded image" className="w-[80vw] h-[85vh]" />
           </div>
         </div>
-      )}
+      )} */}
     </div>
 
     <div className="mt-32">
