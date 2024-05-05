@@ -1,30 +1,40 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "../styles/index.module.css";
-import Link from "next/link";
+// import Image from "next/image";
+// import { Inter } from "next/font/google";
+// import styles from "../styles/index.module.css";
+// import Navbar from "@/components/Navbar";
+// import Link from "next/link";
+// import img from "../public/2023 2.png";
+// const inter = Inter({ subsets: ["latin"] });
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
-  return (
-    <div className={`min-h-screen ${styles.himani} `}>
-      <div className="mx-auto max-w-5xl px-6 lg:px-8">
-        <div className="mx-auto flex flex-col justify-center items-center min-h-screen">
-          <div className="mb-20">
-            <h2 className="text-5xl font-bold tracking-tight text-white sm:text-6xl text-center">
+// const Home = ({ user, logout }) => {
+//   return (
+//     <div className={`min-h-screen ${styles.himani} `}>
+//       <Navbar user={user} logout={logout} />
+//       <div className="mx-auto max-w-5xl px-6 lg:px-8">
+//         <div className="mx-auto flex flex-col justify-center items-center min-h-screen">
+//           <div className="mb-20 flex justify-end">
+{
+  /* <h2 className="text-5xl font-bold tracking-tight text-white sm:text-6xl text-center">
               InterX
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-gray-300 text-center text-3xl">
+            </h2> */
+}
+{
+  /* <p className="mt-4 text-lg leading-8 text-gray-300 text-center text-3xl">
               Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing
               velit quis. Duis tempor incididunt dolore. Lorem, ipsum dolor sit
               amet consectetur adipisicing elit. Est beatae sunt maxime
               pariatur? Aut at quasi ducimus impedit provident corporis iste
               magnam aliquam. Aperiam voluptatibus sit iure minus id excepturi
               beatae sed.
-            </p>
+            </p> */
+}
+{
+  /* <Image src={img} height={400} width={400} />
           </div>
-          <dl className="flex items-end justify-around">
-            {/* <Link
+          <dl className="flex items-end justify-around"> */
+}
+{
+  /* <Link
               href="/read"
               className={`flex flex-col items-start w-[30%] ${styles.blockstyle}`}
             >
@@ -49,8 +59,10 @@ export default function Home() {
                 Non laboris consequat cupidatat laborum magna. Eiusmod non irure
                 cupidatat duis commodo amet.
               </dd>
-            </Link> */}
-            {/* <Link
+            </Link> */
+}
+{
+  /* <Link
               href="/contribute"
               className={`flex flex-col items-start w-[30%] ${styles.blockstyle}`}
             >
@@ -75,22 +87,72 @@ export default function Home() {
                 Officia excepteur ullamco ut sint duis proident non adipisicing.
                 Voluptate incididunt anim.
               </dd>
-            </Link> */}
-          </dl>
-        </div>
-      </div>
-      <div
-        className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6"
-        aria-hidden="true"
-      >
-        <div
+            </Link> */
+}
+//     </dl>
+//   </div>
+// </div>
+// <div
+//   className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6"
+//   aria-hidden="true"
+// >
+{
+  /* <div
           className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
           style={{
             "clip-path":
               "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
           }}
-        ></div>
+        ></div> */
+}
+//       </div>
+//     </div>
+//   );
+// };
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "../styles/index.module.css";
+import Navbar from "@/components/Navbar";
+import Link from "next/link";
+import img from "../public/2023 2.png";
+const inter = Inter({ subsets: ["latin"] });
+
+const Home = ({ user, logout }) => {
+  return (
+    <div className={`min-h-screen flex flex-col ${styles.himani}`}>
+      <Navbar user={user} logout={logout} />
+      <div className="flex-grow flex  justify-between items-center mx-10">
+        <div className="text-center flex flex-col">
+          <h2 className="text-6xl">
+            Prepare for your <br></br> interviews
+          </h2>
+          <p className="text-xl mt-4">
+            One stop platform for all the interview experiences
+          </p>
+
+          <div className=" justify-center mt-8 space-x-4">
+            <Link
+              href="/read"
+              className="px-4 py-2 bg-gray-300 text-black rounded"
+            >
+              Read
+            </Link>
+            <Link
+              href="/contribute"
+              className="px-4 py-2 bg-gray-300 text-black rounded"
+            >
+              Contribute
+            </Link>
+          </div>
+        </div>
+        <div className="mx-10 mt-20 flex justify-center items-center">
+          <div className="flex justify-center items-center ">
+            <Image src={img} height={400} width={400} />
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Home;
