@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
 import React from "react";
-
+import styles from "../../styles/index.module.css";
 const detailPage = ({ user, logout, transcript }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -12,13 +12,21 @@ const detailPage = ({ user, logout, transcript }) => {
   return (
     <div className=" min-h-screen">
       <Navbar user={user} logout={logout} />
-      <div className="w-[80%] bg-[#ffffff36] m-auto rounded-xl mt-20 mb-20">
+      <div className={`w-[80%]  m-auto mt-20 mb-20 ${styles.transcript}`}>
         <div className="flex flex-col items-start justify-center p-4">
-          <div className="font-bold text-4xl py-2">
-            UPSC Civil Services Examination, 2024
-          </div>
+          {/* <div className="font-bold text-4xl py-2">
+            <dt className="mt-4 font-semibold text-2xl text-center ">
+              {transcript.interview_name}
+            </dt> */}
+          {/* </div> */}
           <div className="font-bold text-2xl py-2">
-            ~ UPSC Interview Transcript By Divyanshu Jha Board Venkatrami Reddy
+            {transcript.interview_name}
+          </div>
+          <div className="grid grid-cols-4 gap-4 bg-slate-400">
+            <div>{transcript.user_id}</div>
+            <div>{transcript.work_experience}</div>
+            <div>{transcript.user_id}</div>
+            <div>{transcript.user_id}</div>
           </div>
         </div>
         <hr className="w-[90%] border-solid border-1 border-white mx-4 my-8" />
@@ -135,16 +143,19 @@ const detailPage = ({ user, logout, transcript }) => {
 
 export default detailPage;
 
-export async function getServerSideProps(context){
-  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcript_by_url_slug`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      category_slug: context.query.slug
-    }),
-  });
+export async function getServerSideProps(context) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcript_by_url_slug`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        category_slug: context.query.slug,
+      }),
+    }
+  );
   console.log("response+++", response);
   let transcript = {};
   if (response.status == 200) {
