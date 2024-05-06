@@ -13,16 +13,18 @@ import InterviewTranscript from "@/models/InterviewTranscript";
 // import { MongoClient } from 'mongodb';
 
 const Transcripts = ({ user, logout, transcripts }) => {
-  console.log(transcripts);
+  // console.log(transcripts);
   const router = useRouter();
   const { slug } = router.query;
   const [additionalFields, setadditionalFields] = useState([]);
 
   useEffect(()=>{
-    const category = transcripts[0].category;
-    console.log('category++', category);
-    setadditionalFields(categoryAdditionalFields[category]);
-    // console.log('additionalFields++', additionalFields);
+    if(transcript.length>0){
+      const category = transcripts[0].category;
+      console.log('category++', category);
+      setadditionalFields(categoryAdditionalFields[category]);
+      // console.log('additionalFields++', additionalFields);
+    }
   }, [])
 
   const categoryAdditionalFields = {
