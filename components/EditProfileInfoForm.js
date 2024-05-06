@@ -1,50 +1,39 @@
 import {React, useState, useEffect} from 'react'
 import Link from 'next/link';
 
-const EditProfileInfoForm = ({editForm}) => {
-  const [name, setname] = useState('');
-  const [email, setemail] = useState('');
-  // const [degree, setdegree] = useState('');
-  // const[about, setabout] = useState('');
-  const[password, setpassword] = useState('');
-  // const Degrees = ["B.Tech.", "B.Com.", "BCA", "BSC", "M.Tech.", "MBA"];
+const EditProfileInfoForm = ({editForm, editpasswordform, name, email, about, handleNameChange, handleAboutChange, handlePasswordChange, onSubmitPersonalInfo}) => {
 
-  const handleNameChange = (event) => {
-    setname(event.target.value);
+  const handleEditNameChange = (event) => {
+    handleNameChange(event.target.value);
   };
-  // const handleContactChange = (event) => {
-  //   setcontact(event.target.value);
-  // };
-  const handleEmailChange = (event) => {
-    setemail(event.target.value);
+  const handleEditPasswordChange = (event) => {
+    handlePasswordChange(event.target.value);
   };
-  // const handleDegreeChange = (event) => {
-  //   setdegree(event.target.value);
-  // };
-  const handlePasswordChange = (event) => {
-    setpassword(event.target.value);
+  const handleEditAboutChange = (event) => {
+    handleAboutChange(event.target.value);
   };
-  // const handleAboutChange = (event) => {
-  //   setabout(event.target.value);
-  // };
   const handleSubmit = (event) =>{
-    console.log(name, email, password);
-    onSubmitPersonalInfo(name, email, password);
+    onSubmitPersonalInfo();
   }
+
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className="mb-4 text-black w-full">
 				<label for="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Name</label>
-				<input type="text" id="name" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Jen bazos" onChange={handleNameChange} disabled={!editForm} required />
+				<input type="text" id="name" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" value={name} onChange={handleEditNameChange} disabled={!editForm} required />
 			</div>
       <div className="mb-4 text-black w-full">
 				<label for="email" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Email</label>
-				<input type="email" id="email" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="your@email.com" onChange={handleEmailChange} disabled={!editForm} required />
+				<input type="email" id="email" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" value={email} disabled={true} required />
 			</div>
-      {editForm ? (
+      <div className="mb-4 text-black w-full">
+				<label for="about" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">About</label>
+				<input type="text" id="about" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" value={about} onChange={handleEditAboutChange} disabled={!editForm} required />
+			</div>
+      {editpasswordform ? (
       <div className="mb-4 text-black w-full">
 				<label for="password" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Password</label>
-				<input type="text" id="password" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter New Password" onChange={handlePasswordChange} disabled={!editForm} required />
+				<input type="text" id="password" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter New Password" onChange={handleEditPasswordChange} disabled={!editpasswordform} required />
 			</div>
       ) : null}
       {editForm ? (
