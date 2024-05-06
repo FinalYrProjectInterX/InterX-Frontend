@@ -186,7 +186,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
           <option value="Offline">
             Offline
           </option>
-          <option value="Offline">
+          <option value="Online">
             Online
           </option>
         </select>
