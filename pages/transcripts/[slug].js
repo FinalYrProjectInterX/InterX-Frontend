@@ -19,7 +19,7 @@ const Transcripts = ({ user, logout, transcripts }) => {
   const [additionalFields, setadditionalFields] = useState([]);
 
   useEffect(()=>{
-    if(transcript.length>0){
+    if(transcripts.length>0){
       const category = transcripts[0].category;
       console.log('category++', category);
       setadditionalFields(categoryAdditionalFields[category]);
