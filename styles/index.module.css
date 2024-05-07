@@ -16,3 +16,16 @@
   padding: 17px;
   border-radius:30px;
 }
+.container > div {
+  border: 1px solid black; 
+  padding: 10px; 
+  background-color: #a2b7b6;
+  border-radius:10px;
+  margin-top: 4px;
+}
+
+.block{
+  background-color: white;
+  border-radius:10px;
+ margin:10px;
+}
