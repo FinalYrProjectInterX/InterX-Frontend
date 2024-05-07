@@ -121,9 +121,9 @@ const Home = ({ user, logout }) => {
   return (
     <div className={`min-h-screen flex flex-col ${styles.himani}`}>
       <Navbar user={user} logout={logout} />
-      <div className="flex-grow flex  justify-between items-center mx-10">
+      <div className="flex-grow flex  justify-between items-center mx-20 ">
         <div className="text-center flex flex-col">
-          <h2 className="text-6xl">
+          <h2 className="text-7xl">
             Prepare for your <br></br> interviews
           </h2>
           <p className="text-xl mt-4">
@@ -145,7 +145,7 @@ const Home = ({ user, logout }) => {
             </Link>
           </div>
         </div>
-        <div className="mx-10 mt-20 flex justify-center items-center">
+        <div className="mx-20 flex justify-center items-center">
           <div className="flex justify-center items-center ">
             <Image src={img} height={400} width={400} />
           </div>
