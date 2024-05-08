@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
 import React from "react";
-import styles from "../../styles/index.module.css";
+import styles from "../../../styles/index.module.css";
 const detailPage = ({ user, logout, transcript }) => {
   const router = useRouter();
   const { slug } = router.query;

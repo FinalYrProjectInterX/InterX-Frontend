@@ -23,7 +23,7 @@ const index = ({user, logout, transcripts}) => {
   },[])
 
   const handleReadMoreClick = (transcriptSlug) => {
-    router.push(`/transcript/${transcriptSlug}`);
+    router.push(`/admin/transcript/${transcriptSlug}`);
   };
 
   const handleProofView=(image)=>{
@@ -135,7 +135,7 @@ const index = ({user, logout, transcripts}) => {
           {transcripts.map((transcript) => (
             <Link
               key={transcript._id}
-              href={`/transcript/${transcript.slug}`}
+              href={`/admin/transcript/${transcript.slug}`}
               className={`flex flex-col items-center ${indexStyle.blockstyle}`}
             >
               <dt className="mt-4 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
