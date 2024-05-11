@@ -1,13 +1,16 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/index.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const detailPage = ({ user, logout, transcript }) => {
   const router = useRouter();
   const { slug } = router.query;
   console.log("slug++", slug);
   console.log("transcript+++", transcript);
+
 
   return (
     <div className=" min-h-screen">

@@ -6,8 +6,11 @@ import styles from "../../../styles/index.module.css";
 const detailPage = ({ user, logout, transcript }) => {
   const router = useRouter();
   const { slug } = router.query;
-  console.log("slug++", slug);
-  console.log("transcript+++", transcript);
+
+  const handleChangeinQuestion = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+  }
 
   return (
     <div className=" min-h-screen">
@@ -87,7 +90,6 @@ export async function getServerSideProps(context) {
   if (response.status == 200) {
     transcript = await response.json();
   }
-  console.log("transcript+++", transcript);
   return {
     props: { transcript: transcript },
   };

@@ -4,8 +4,15 @@ import React, {useState, useEffect} from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from '@/components/Footer';
+import Link from 'next/link';
+import indexStyle from "../styles/index.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from 'next/router';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const profile = ({user, logout}) => {
+  const router = useRouter();
   const [editForm, seteditForm] = useState(false);
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -110,6 +117,14 @@ const profile = ({user, logout}) => {
     seteditpasswordform(!editpasswordform);
   }
 
+  const handleEditTranscriptClick = (transcriptSlug) => {
+    router.push(`/edittranscript/${transcriptSlug}`);
+  }
+
+  const handleReadMoreClick = (transcriptSlug) => {
+    router.push(`/transcript/${transcriptSlug}`);
+  };
+
   const additionalFields = [
     {name: 'Category',apiname:'category'},
     {name: 'SubCategory',apiname:'subCategory'},
@@ -118,6 +133,43 @@ const profile = ({user, logout}) => {
     {name: 'Status',apiname:'status'},
     {name: 'Rating',apiname:'rating'}
   ]
+
+  const handleDeleteTranscript = async(event, id) => {
+    event.preventDefault();
+    console.log(id);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    let res = await response.json();
+    console.log(res);
+    if(response.status === 200){
+      toast.success("Transcript Deleted Successfully!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    else{
+      toast.error("Some Error Occured!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  } 
 
   return (
     <>
@@ -135,14 +187,19 @@ const profile = ({user, logout}) => {
       <div className="flex flex-row items-start justify-between w-[80%] m-auto my-8">
         <p className="text-4xl my-2">Transcripts</p>
       </div>
-      {transcripts.length>0 && <div className="flex mx-20 my-10 justify-center">
+      {transcripts.length>0 && <div className="flex mx-20 my-5 justify-center">
         <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
           {transcripts.map((transcript) => (
-            <Link
+            <div
               key={transcript._id}
-              href={`/transcript/${transcript.slug}`}
               className={`flex flex-col items-center ${indexStyle.blockstyle}`}
             >
+              <button
+                className="relative top-0 right-0 h-0 text-right text-black hover:text-red-500 focus:outline-none w-full"
+                onClick={(event) => handleDeleteTranscript(event, transcript._id)}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} size="lg" />
+              </button>
               <dt className="mt-4 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
                 {transcript.interview_name}
               </dt>
@@ -165,15 +222,21 @@ const profile = ({user, logout}) => {
                   </dd>
                 ))}
               </div>
-              <div className="flex justify-center mt-6">
+              <div className="flex items-center justify-between mt-6 w-3/4">
                 <button
                   className="text-white focus:outline-none"
                   onClick={() => handleReadMoreClick(transcript.slug)}
                 >
                   Read More
                 </button>
+                <button
+                  className="text-white focus:outline-none mr-4"
+                  onClick={() => handleEditTranscriptClick(transcript.slug)}
+                >
+                  Edit
+                </button>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>}
