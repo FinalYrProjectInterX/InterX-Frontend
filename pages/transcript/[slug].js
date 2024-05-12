@@ -13,14 +13,14 @@ const detailPage = ({ user, logout, transcript }) => {
     <div className=" min-h-screen">
       <Navbar user={user} logout={logout} />
       <div className={`w-[80%]  m-auto mt-20 mb-20 ${styles.transcript}`}>
-        <div className="flex flex-col items-start justify-center p-4">
-          <div className="font-bold text-2xl py-2">
+        <div className="flex flex-col text-center justify-center p-4">
+          <div className="font-bold  text-2xl py-2">
             {transcript.interview_name}
           </div>
 
-          <div className={`grid grid-cols-4 gap-4 ${styles.container}`}>
+          <div className={`grid grid-cols-4 gap-4  ${styles.container}`}>
             <div>{transcript.user_name}</div>
-            <div>{transcript.work_experience}</div>
+            <div>{transcript.work_experience} yrs Experience</div>
             <div>{transcript.year_of_interview}</div>
             <div>{transcript.specialization}</div>
           </div>
