@@ -262,100 +262,98 @@ const contribute = ({ user, logout }) => {
             theme: "light",
           });
         }
+        router.push('/transcript/'+urlSlug);
       } else {
-        // toast.error("Image upload failed!!", {
-        //   position: "top-left",
-        //   autoClose: 3000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
-        console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
-        const response2 = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/create_transcript`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            token: token,
-            interview_name: clearedInterview,
-            category: category,
-            subCategory: subCategory,
-            optional_subject: optionalSubject?optionalSubject:"",
-            gap_years: gapYears?gapYears:"",
-            year_of_interview: InterviewYear?InterviewYear:(admissionYear?admissionYear:""),
-            specialization: specialization?specialization:"",
-            work_experience: workExperience?workExperience:"",
-            exam_scores: catScore?catScore:(marks?marks:""),
-            visa_type: visaType?visaType:"",
-            country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
-            purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
-            programming_languages: programmingLanguages?programmingLanguages:"",
-            tech_stack_used: techStackUsed?techStackUsed:"",
-            branch: branch?branch:"",
-            commision_type: commissionType?commissionType:"",
-            bank_name: bankName?bankName:"",
-            interview_experience: experience?experience:"",
-            interview_tips: tips?tips:"",
-            additional_info: additionalInfo?additionalInfo:"",
-            other_profile_info: otherInfo?otherInfo:"",
-            interview_mode: interviewMode?interviewMode:"",
-            rating: 0,
-            category_slug: categorySlug?categorySlug:"",
-            slug: urlSlug?urlSlug:"",
-            service_name: serviceName?serviceName:"",
-            status: "Pending",
-            image_proof: "",
-            questions_answers: quesans
-          })
+        toast.error("Image upload failed!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
-        console.log("response2+++", response2);
-        const JSONdata = await response2.json();
-        console.log("JSONdata+++", JSONdata);
-        if (response2.status==200) {
-          toast.success("Transcript Created Successfully!!", {
-            position: "top-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        else{
-          toast.error("Some Error Occured!!", {
-            position: "top-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
       }
-      setcategorySubmitFormDisplay("none");
-      setQAFormDisplay("none");
-      setAdditionalInfoDisplay("none");
-      setImageProofDisplay("block");
     }
     else{
-      toast.error("Please Submit the Proof first!!", {
-        position: "top-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      // toast.error("Please Submit the Proof first!!", {
+      //   position: "top-left",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+      console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+      const response2 = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/create_transcript`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token: token,
+          interview_name: clearedInterview,
+          category: category,
+          subCategory: subCategory,
+          optional_subject: optionalSubject?optionalSubject:"",
+          gap_years: gapYears?gapYears:"",
+          year_of_interview: InterviewYear?InterviewYear:(admissionYear?admissionYear:""),
+          specialization: specialization?specialization:"",
+          work_experience: workExperience?workExperience:"",
+          exam_scores: catScore?catScore:(marks?marks:""),
+          visa_type: visaType?visaType:"",
+          country_applied_for_visa: appliedCountryForVisa?appliedCountryForVisa:"",
+          purpose_of_travel: purposeOfTravel?purposeOfTravel:"",
+          programming_languages: programmingLanguages?programmingLanguages:"",
+          tech_stack_used: techStackUsed?techStackUsed:"",
+          branch: branch?branch:"",
+          commision_type: commissionType?commissionType:"",
+          bank_name: bankName?bankName:"",
+          interview_experience: experience?experience:"",
+          interview_tips: tips?tips:"",
+          additional_info: additionalInfo?additionalInfo:"",
+          other_profile_info: otherInfo?otherInfo:"",
+          interview_mode: interviewMode?interviewMode:"",
+          rating: 0,
+          category_slug: categorySlug?categorySlug:"",
+          slug: urlSlug?urlSlug:"",
+          service_name: serviceName?serviceName:"",
+          status: "Pending",
+          image_proof: "",
+          questions_answers: quesans
+        })
       });
+      console.log("response2+++", response2);
+      const JSONdata = await response2.json();
+      console.log("JSONdata+++", JSONdata);
+      if (response2.status==200) {
+        toast.success("Transcript Created Successfully!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        router.push('/transcript/'+urlSlug);
+      }
+      else{
+        toast.error("Some Error Occured!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
   };
 
