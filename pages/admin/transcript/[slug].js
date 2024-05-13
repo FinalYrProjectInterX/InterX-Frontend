@@ -7,11 +7,6 @@ const detailPage = ({ user, logout, transcript }) => {
   const router = useRouter();
   const { slug } = router.query;
 
-  const handleChangeinQuestion = (event) => {
-    event.preventDefault();
-    console.log(event.target.value);
-  }
-
   return (
     <div className=" min-h-screen">
       <Navbar user={user} logout={logout} />

@@ -41,12 +41,15 @@ const index = ({user, logout, transcripts}) => {
       });
   }
 
-  const handleApproveTranscript = async(id) => {
+  const handleApproveTranscript = async(id, email) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/admin/transcripts/approve/${id}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        email: email
+      })
     });
     const JSONdata = await response.json();
     console.log(JSONdata);
@@ -76,12 +79,15 @@ const index = ({user, logout, transcripts}) => {
     }
   }
 
-  const handleRejectTranscript = async(id) => {
+  const handleRejectTranscript = async(id, email) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/admin/transcripts/reject/${id}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        email: email
+      })
     });
     const JSONdata = await response.json();
     console.log(JSONdata);
@@ -175,13 +181,13 @@ const index = ({user, logout, transcripts}) => {
                 </button>
                 <button
                   className="text-white focus:outline-none"
-                  onClick={(event) => {event.preventDefault();handleApproveTranscript(transcript._id);}}
+                  onClick={(event) => {event.preventDefault();handleApproveTranscript(transcript._id, transcript.user_id);}}
                 >
                   Approve
                 </button>
                 <button
                   className="text-white focus:outline-none"
-                  onClick={(event) => {event.preventDefault();handleRejectTranscript(transcript._id);}}
+                  onClick={(event) => {event.preventDefault();handleRejectTranscript(transcript._id, transcript.user_id);}}
                 >
                   Reject
                 </button>
