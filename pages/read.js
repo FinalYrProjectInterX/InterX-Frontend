@@ -15,7 +15,7 @@ const CategoryBlock = ({ item }) => {
       className={`flex flex-col items-center ${indexStyle.blockstyle}`}
     >
       <dt className="mt-4 font-semibold text-3xl">{item.name}</dt>
-      <dd className="mt-2 leading-7 text-center text-gray-400">
+      <dd className="mt-2 leading-7 text-center text-white">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
@@ -25,7 +25,7 @@ const CategoryBlock = ({ item }) => {
       className={`flex flex-col items-center ${indexStyle.blockstyle}`}
     >
       <dt className="mt-4 font-semibold text-3xl">{item.name}</dt>
-      <dd className="mt-2 leading-7 text-center text-gray-400">
+      <dd className="mt-2 leading-7 text-center text-white">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />

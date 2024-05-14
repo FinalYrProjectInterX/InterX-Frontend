@@ -11,20 +11,45 @@ import mongoose from "mongoose";
 import InterviewTranscript from "@/models/InterviewTranscript";
 // import { MongoClient } from 'mongodb';
 
-const Transcripts = ({ user, logout, transcripts }) => {
+const Transcripts = ({ user, logout }) => {
   // console.log(transcripts);
   const router = useRouter();
   const { slug } = router.query;
   const [additionalFields, setadditionalFields] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [transcripts, setTranscripts] = useState([]);
+  const [filteredTranscripts, setFilteredTranscripts] = useState([]);
 
   useEffect(()=>{
-    if(transcripts.length>0){
-      const category = transcripts[0].category;
-      console.log('category++', category);
-      setadditionalFields(categoryAdditionalFields[category]);
-      // console.log('additionalFields++', additionalFields);
-    }
-  }, [])
+    setLoading(true);
+    const fetchData = async () => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          category_slug: router.query.slug
+        }),
+      });
+      if (response.status == 200) {
+        let t = await response.json();
+        setTranscripts(t);
+        setFilteredTranscripts(t);
+        if(t.length>0){
+          const category = t[0].category;
+          console.log('category++', category);
+          setadditionalFields(categoryAdditionalFields[category]);
+          // console.log('additionalFields++', additionalFields);
+        } 
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+    
+    
+  }, [router.query.slug])
 
   const categoryAdditionalFields = {
     'UPSC': [
@@ -76,7 +101,6 @@ const Transcripts = ({ user, logout, transcripts }) => {
     yearOfInterview: "",
   });
 
-  const [filteredTranscripts, setFilteredTranscripts] = useState(transcripts);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -195,6 +219,11 @@ const Transcripts = ({ user, logout, transcripts }) => {
         {/* <SearchBar placeholder="Search..." /> */}
       </div>
       <div className="flex mx-20 my-10 justify-center">
+        {loading && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+            </div>
+        )}
         <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
           {filteredTranscripts.map((transcript) => (
             <Link
@@ -243,35 +272,22 @@ const Transcripts = ({ user, logout, transcripts }) => {
 
 export default Transcripts;
 
-export async function getServerSideProps(context) {
-  console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
-  const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      category_slug: context.query.slug
-    }),
-  });
-  let transcripts = [];
-  if (response.status == 200) {
-    transcripts = await response.json();
-  }
-  // const client = new MongoClient(process.env.MONGODB_URI, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  // });
-  // await client.connect();
-  // const db = client.db('Interx');
-  // // console.log(db);
-  // const collection = db.collection('transcripts');
-  // // console.log(collection);
-  // const query = { category_slug: context.query.slug };
-  // const transcripts = await collection.find(query).toArray();
-  // // console.log(transcripts);
-  // await client.close();
-  return{
-    props:{transcripts: transcripts}
-  }
-}
+// export async function getServerSideProps(context) {
+//   console.log(process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST);
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
+//     method: 'POST',
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({
+//       category_slug: context.query.slug
+//     }),
+//   });
+//   let transcripts = [];
+//   if (response.status == 200) {
+//     transcripts = await response.json();
+//   }
+//   return{
+//     props:{transcripts: transcripts}
+//   }
+// }

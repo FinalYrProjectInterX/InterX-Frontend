@@ -15,7 +15,7 @@ const SubCategoryBlock = ({ item }) => {
       className={`flex flex-col items-center ${indexStyle.blockstyle}`}
     >
       <dt className="mt-4 font-semibold text-3xl">{item.name}</dt>
-      <dd className="mt-2 leading-7 text-center text-gray-400">
+      <dd className="mt-2 leading-7 text-center text-white">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
@@ -26,8 +26,10 @@ const SubCategoryBlock = ({ item }) => {
 const DynamicCategories = ({ user, logout }) => {
   const router = useRouter();
   const [subCategories, setsubCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
  
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const { slug } = router.query;
       console.log("slug:", slug);
@@ -42,32 +44,40 @@ const DynamicCategories = ({ user, logout }) => {
     };
 
     fetchData();
+    setLoading(false);
   }, [router.query.slug]);
 
   return (
-    <div className="min-h-screen">
-      <Navbar user={user} logout={logout} />
-      <div className="flex flex-col items-start justify-center my-12 mx-40">
-        <p className="text-4xl my-2">
-          Browse the Interview Scripts of Specific Category and give it a read!!
-        </p>
-        <p className="text-xl my-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
-          nostrum! Minima veritatis velit asperiores fugit provident, dolore
-          rerum quam, commodi cum saepe possimus id incidunt laborum. Quas,
-          enim? Rem obcaecati in eos.
-        </p>
-      </div>
-      <div className="flex mx-20 my-10">
-        <div className="grid grid-cols-3 gap-8 mx-20 my-20">
-          {subCategories &&
-            subCategories.map((item) => {
-              return <SubCategoryBlock key={item.id} item={item} />;
-            })}
+    <>
+      {loading && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+          </div>
+      )}
+      <div className="min-h-screen">
+        <Navbar user={user} logout={logout} />
+        <div className="flex flex-col items-start justify-center my-12 mx-40">
+          <p className="text-4xl my-2">
+            Browse the Interview Scripts of Specific Category and give it a read!!
+          </p>
+          <p className="text-xl my-2">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+            nostrum! Minima veritatis velit asperiores fugit provident, dolore
+            rerum quam, commodi cum saepe possimus id incidunt laborum. Quas,
+            enim? Rem obcaecati in eos.
+          </p>
         </div>
+        <div className="flex mx-20 my-10">
+          <div className="grid grid-cols-3 gap-8 mx-20 my-20">
+            {subCategories &&
+              subCategories.map((item) => {
+                return <SubCategoryBlock key={item.id} item={item} />;
+              })}
+          </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

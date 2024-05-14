@@ -58,6 +58,7 @@ const contribute = ({ user, logout }) => {
   const [urlSlug, seturlSlug] = useState("");
   const [interviewMode, setinterviewMode] = useState('');
   const [otherInfo, setotherInfo] = useState('');
+  const [loading, setLoading] = useState(false);
   const categoryAdditionalFields = {
     UPSC: ['Optional Subject', 'Gap Years', 'Marks', 'Year of Interview'],
     MBA: ['Specialization', 'Work Experience', 'CAT/GMAT Score','Year of Admission'],
@@ -183,6 +184,7 @@ const contribute = ({ user, logout }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     if (file) {
       const formData = new FormData();
       formData.append('image', file);
@@ -355,6 +357,7 @@ const contribute = ({ user, logout }) => {
         });
       }
     }
+    setLoading(false);
   };
 
   const handleBackFromQA = () => {
@@ -373,6 +376,11 @@ const contribute = ({ user, logout }) => {
 
   return (
     <>
+    {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+        </div>
+    )}
     <div className="h-auto">
       <ToastContainer />
       <Navbar user={user} logout={logout} />
