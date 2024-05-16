@@ -10,7 +10,7 @@ const detailPage = ({ user, logout }) => {
   const { slug } = router.query;
   console.log("slug++", slug);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [transcript, setTranscript] = useState([]);
 
   useEffect(()=>{

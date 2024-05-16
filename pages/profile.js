@@ -20,8 +20,10 @@ const profile = ({user, logout}) => {
   const [about, setabout] = useState("");
   const [editpasswordform, seteditpasswordform] = useState(false);
   const [transcripts, settranscripts] = useState([]);
+  const [loading, setLoading] = useState(false);
   
   useEffect(()=>{
+    setLoading(true);
     const func1 = async(token) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/profile`, {
         method: 'POST',
@@ -49,6 +51,7 @@ const profile = ({user, logout}) => {
       let tmp = await response1.json();
       console.log(tmp);
       settranscripts(tmp);
+      setLoading(false);
     }
     const token = JSON.parse(localStorage.getItem('token'));
     console.log("token+++", token);
@@ -173,6 +176,11 @@ const profile = ({user, logout}) => {
 
   return (
     <>
+    {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+        </div>
+    )}
     <div>
       <ToastContainer />
       <Navbar user={user} logout={logout}/>
@@ -200,7 +208,7 @@ const profile = ({user, logout}) => {
               >
                 <FontAwesomeIcon icon={faTrashAlt} size="lg" />
               </button>
-              <dt className="mt-4 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
+              <dt className="mt-8 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
                 {transcript.interview_name}
               </dt>
               <div className="flex flex-col items-center justify-between w-full">

@@ -264,7 +264,7 @@ const contribute = ({ user, logout }) => {
             theme: "light",
           });
         }
-        router.push('/transcript/'+urlSlug);
+        router.push('/profile');
       } else {
         toast.error("Image upload failed!!", {
           position: "top-left",
