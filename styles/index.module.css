@@ -2,7 +2,7 @@
   background-image: linear-gradient(rgba(53, 54, 111, 1),rgba(224, 222, 242, 0.6));
   padding: 17px;
   border-radius: 20px;
-  border: 2px solid white;
+  width:100%;
 }
 .himani{
   background-image: url("../public/Desktop\ -\ 8.png");
@@ -30,3 +30,47 @@
   border-radius:10px;
  margin:10px;
 }
+
+.himani {
+  font-family: Inter, sans-serif;
+  width: 100%; 
+}
+
+@media (max-width: 768px) {
+  /* Styles for smaller screens (phones) */
+  .flex-grow {
+    flex-direction: column;
+  }
+
+  .text-center,
+  .text-left {
+    text-align: center; 
+  }
+
+  .w-full {
+    width: 100%; 
+  }
+  .himani h2 {
+    font-size: 2rem;
+  }
+
+  .himani p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 768px) { 
+  .flex-grow {
+    flex-direction: row; 
+  }
+
+  .text-center {
+    text-align: left; 
+  }
+
+  .w-full {
+    width: auto;
+  }
+
+}
+
