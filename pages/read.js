@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 const CategoryBlock = ({ item }) => {
   return (
-    item.subCategories.length!=0?<Link
+    <Link
       href={`/category/${item.slug}`}
       className={`flex flex-col items-center ${indexStyle.blockstyle} p-6`}
     >
