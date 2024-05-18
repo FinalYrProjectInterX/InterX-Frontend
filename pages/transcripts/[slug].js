@@ -4,11 +4,13 @@ import Navbar from "../../components/Navbar";
 import indexStyle from "../../styles/index.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer";
 import mongoose from "mongoose";
 import InterviewTranscript from "@/models/InterviewTranscript";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { MongoClient } from 'mongodb';
 
 const Transcripts = ({ user, logout }) => {
@@ -19,6 +21,7 @@ const Transcripts = ({ user, logout }) => {
   const [loading, setLoading] = useState(true);
   const [transcripts, setTranscripts] = useState([]);
   const [filteredTranscripts, setFilteredTranscripts] = useState([]);
+  const [isHeartFilled, setIsHeartFilled] = useState(false);
 
   useEffect(()=>{
     setLoading(true);
@@ -152,8 +155,46 @@ const Transcripts = ({ user, logout }) => {
     });
   };
 
+  const handleLikeClick = async(id) => {
+    setLoading(true);
+    setIsHeartFilled(true);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/like/${id}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    if (response.status == 200) {
+      // toast.success("Success!!", {
+      //   position: "top-left",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+      console.log('rating improved successfully!!');
+    }
+    else{
+      toast.error("Some Error Occured!!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    setLoading(false);
+  }
+
   return (
     <div className="min-h-screen">
+      <ToastContainer />
       <Navbar user={user} logout={logout} />
       <div className="flex flex-col items-start justify-center my-12 mx-40">
         <p className="text-4xl my-2">
@@ -228,14 +269,21 @@ const Transcripts = ({ user, logout }) => {
                     <span className="w-2/5 text-white ">{transcript[item.apiname]?transcript[item.apiname]:""}</span>
                   </dd>
                 ))}
+                <dd className="mt-2 leading-7 flex flex-row justify-between w-full">
+                    <span className="w-1/2 text-black">Rating</span>
+                    <span className="w-2/5 text-white ">{transcript.rating}</span>
+                  </dd>
               </div>
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-center mt-6 w-full">
                 <button
-                  className="text-white focus:outline-none"
+                  className="text-white focus:outline-none w-full"
                   onClick={() => handleReadMoreClick(transcript.slug)}
                 >
                   Read More
                 </button>
+                <span className="relative right-0">
+                  <FontAwesomeIcon icon={faHeart} className="relative right-0" style={{ color: isHeartFilled ? 'red' : 'white'}} onClick={(event)=>{event.preventDefault();handleLikeClick(transcript._id); transcript.rating=transcript.rating+1}} />
+                </span>
               </div>
             </Link>
           ))}

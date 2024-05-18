@@ -16,7 +16,7 @@ const CategoryBlock = ({ item }) => {
       <dt className="mt-4 font-semibold text-xl sm:text-2xl lg:text-3xl">
         {item.name}
       </dt>
-      <dd className="mt-2 leading-7 text-center text-gray-400">
+      <dd className="mt-2 leading-7 text-center text-white">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
@@ -28,7 +28,7 @@ const CategoryBlock = ({ item }) => {
       <dt className="mt-4 font-semibold text-xl sm:text-2xl lg:text-3xl">
         {item.name}
       </dt>
-      <dd className="mt-2 leading-7 text-center text-gray-400">
+      <dd className="mt-2 leading-7 text-center text-white">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
