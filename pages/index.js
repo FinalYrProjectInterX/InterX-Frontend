@@ -119,33 +119,37 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Home = ({ user, logout }) => {
   return (
-    <div className={`min-h-screen flex flex-col ${styles.himani}`}>
+    <div className={`min-h-screen flex flex-col ${styles.himani} w-full`}>
       <Navbar user={user} logout={logout} />
-      <div className="flex-grow flex  justify-between my-40 mx-20 ">
-        <div className="text-center flex flex-col">
-          <h2 className="text-7xl">
-            Prepare for your <br></br> interviews
+      <div className="flex-grow flex justify-between my-20 ml-52 mr-48 ">
+        <div className="flex flex-col mt-8">
+          <h2 className="text-6xl">
+            Prepare
           </h2>
-          <p className="text-xl mt-4">
+          <h2 className="text-6xl mt-2">for your
+          </h2>
+          <h2 className="text-6xl mt-2">interviews
+          </h2>
+          <p className="text-lg mt-8">
             One stop platform for all the interview experiences
           </p>
 
           <div className=" justify-center mt-8 space-x-4">
             <Link
               href="/read"
-              className="px-4 py-2 bg-gray-300 text-black rounded"
+              className="px-10 py-3 bg-gray-300 text-black rounded-xl text-xl"
             >
               Read
             </Link>
             <Link
               href="/contribute"
-              className="px-4 py-2 bg-gray-300 text-black rounded"
+              className="px-10 py-3 bg-gray-300 text-black rounded-xl text-xl"
             >
               Contribute
             </Link>
           </div>
         </div>
-        <div className="mx-20 flex justify-center">
+        <div className="mr-28 mb-20 flex justify-center">
           <Image src={img} height={400} width={400} />
         </div>
       </div>
