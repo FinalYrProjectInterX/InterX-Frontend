@@ -19,7 +19,7 @@ const Navbar = ({ user, logout }) => {
       <div className="flex flex-row items-center justify-between">
         <div className="mx-4 text-xl">
           <Link href="/" className="">
-            About
+            Home
           </Link>
         </div>
         <div className="mx-4 text-xl">
