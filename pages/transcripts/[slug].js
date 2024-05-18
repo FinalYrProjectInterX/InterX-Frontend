@@ -19,124 +19,124 @@ const Transcripts = ({ user, logout }) => {
   const [loading, setLoading] = useState(true);
   const [transcripts, setTranscripts] = useState([]);
   const [filteredTranscripts, setFilteredTranscripts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState({});
 
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          category_slug: router.query.slug
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/get_transcripts_by_category_slug`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category_slug: router.query.slug,
+          }),
+        }
+      );
       if (response.status == 200) {
         let t = await response.json();
         setTranscripts(t);
         setFilteredTranscripts(t);
-        if(t.length>0){
+        if (t.length > 0) {
           const category = t[0].category;
-          console.log('category++', category);
-          setadditionalFields(categoryAdditionalFields[category]);
+          const subcategory = t[0].subcategory || "General";
+          console.log("category++", category);
+          setadditionalFields(categoryAdditionalFields[category][subcategory]);
           // console.log('additionalFields++', additionalFields);
-        } 
+        }
       }
       setLoading(false);
     };
 
     fetchData();
-    
-    
-  }, [router.query.slug])
+  }, [router.query.slug]);
 
   const categoryAdditionalFields = {
-    'UPSC': [
-      {name: 'Optional Subject',apiname:'optional_subject'},
-      {name: 'Gap Years',apiname:'gap_years'},
-      {name: 'Marks',apiname:'exam_scores'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'MBA': [
-      {name: 'Specialization',apiname:'specialization'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'CAT/GMAT Score',apiname:'exam_scores'},
-      {name: 'Year of Admission',apiname:'year_of_interview'}
-    ],
-    'VISA': [
-      {name: 'VISA Type',apiname:'visa_type'},
-      {name: 'Country Applied for VISA',apiname:'country_applied_for_visa'},
-      {name: 'Purpose of Travel',apiname:'purpose_of_travel'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Coding & Technical': [
-      {name: 'Programming Languages',apiname:'programming_languages'},
-      {name: 'Tech Stack Used',apiname:'tech_stack_used'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Indian Armed Forces': [
-      {name: 'Service Name',apiname:'service_name'},
-      {name: 'Branch',apiname:'branch'},
-      {name: 'Commission Type',apiname:'commision_type'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Bank PO': [
-      {name: 'Bank Name',apiname:'bankName'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ]
+    UPSC: {
+      General: [
+        { name: "Optional Subject", apiname: "optional_subject" },
+        { name: "Gap Years", apiname: "gap_years" },
+        { name: "Marks", apiname: "exam_scores" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+      "Civil Services": [
+        { name: "Optional Subject", apiname: "optional_subject" },
+        { name: "Gap Years", apiname: "gap_years" },
+        { name: "Marks", apiname: "exam_scores" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    MBA: {
+      General: [
+        { name: "Specialization", apiname: "specialization" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "CAT/GMAT Score", apiname: "exam_scores" },
+        { name: "Year of Admission", apiname: "year_of_interview" },
+      ],
+      "Internal MBA": [
+        { name: "Specialization", apiname: "specialization" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "CAT/GMAT Score", apiname: "exam_scores" },
+        { name: "Year of Admission", apiname: "year_of_interview" },
+      ],
+    },
+    VISA: {
+      General: [
+        { name: "VISA Type", apiname: "visa_type" },
+        {
+          name: "Country Applied for VISA",
+          apiname: "country_applied_for_visa",
+        },
+        { name: "Purpose of Travel", apiname: "purpose_of_travel" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Coding & Technical": {
+      General: [
+        { name: "Programming Languages", apiname: "programming_languages" },
+        { name: "Tech Stack Used", apiname: "tech_stack_used" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Indian Armed Forces": {
+      General: [
+        { name: "Service Name", apiname: "service_name" },
+        { name: "Branch", apiname: "branch" },
+        { name: "Commission Type", apiname: "commission_type" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Bank PO": {
+      General: [
+        { name: "Bank Name", apiname: "bankName" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
   };
 
   const handleReadMoreClick = (transcriptSlug) => {
     router.push(`/transcript/${transcriptSlug}`);
   };
 
-  const [searchTerm, setSearchTerm] = useState({
-    ExamName: "",
-    optionalSubject: "",
-    work_experience: "",
-    gapYear: "",
-    yearOfInterview: "",
-  });
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const filtered = transcripts.filter((transcript) => {
-      const matchExamName = searchTerm.ExamName
-        ? transcript.interview_name
-            .toLowerCase()
-            .includes(searchTerm.ExamName.toLowerCase())
-        : true;
-      const matchGapYear =
-        searchTerm.gapYear !== ""
-          ? transcript.gap_years === Number(searchTerm.gapYear)
-          : true;
-      const matchYearOfInterview =
-        searchTerm.yearOfInterview !== ""
-          ? transcript.year_of_interview === Number(searchTerm.yearOfInterview)
-          : true;
-      const matchOptionalSubject =
-        searchTerm.optionalSubject !== ""
-          ? transcript.optional_subject === searchTerm.optionalSubject
-          : true;
-      const matchWorkExperience =
-        searchTerm.work_experience !== ""
-          ? transcript.work_experience === Number(searchTerm.work_experience)
-          : true;
-      return (
-        matchExamName &&
-        matchGapYear &&
-        matchYearOfInterview &&
-        matchOptionalSubject &&
-        matchWorkExperience
-      );
+      return additionalFields.every((field) => {
+        if (searchTerm[field.apiname]) {
+          return transcript[field.apiname]
+            ?.toLowerCase()
+            .includes(searchTerm[field.apiname].toLowerCase());
+        }
+        return true;
+      });
     });
     setFilteredTranscripts(filtered);
   };
-
   const handleChange = (e) => {
     setSearchTerm({
       ...searchTerm,
@@ -158,71 +158,41 @@ const Transcripts = ({ user, logout }) => {
           enim? Rem obcaecati in eos.
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-wrap items-center justify-center  mt-4 text-black "
-      >
-        <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
-          <input
-            type="text"
-            name="ExamName"
-            value={searchTerm.ExamName}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="Exam Name"
-          />
 
-          <input
-            type="text"
-            name="optionalSubject"
-            value={searchTerm.optionalSubject}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="optionalSubject"
-          />
-          <input
-            type="text"
-            name="work_experience"
-            value={searchTerm.work_experience}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="work_experience"
-          />
-
-          <input
-            type="text"
-            name="gapYear"
-            value={searchTerm.gapYear}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="Gap Year"
-          />
-
-          <input
-            type="text"
-            name="yearOfInterview"
-            value={searchTerm.yearOfInterview}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="yearOfInterview"
-          />
-          {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
-          >
-            Search
-          </button>
-        </div>
-      </form>
+      {additionalFields.length > 0 && (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-wrap items-center justify-center mt-4 text-black"
+        >
+          <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
+            {additionalFields.map((field) => (
+              <input
+                key={field.apiname}
+                type="text"
+                name={field.apiname}
+                value={searchTerm[field.apiname] || ""}
+                onChange={handleChange}
+                className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+                placeholder={field.name}
+              />
+            ))}
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+      )}
 
       {/* <SearchBar placeholder="Search..." /> */}
 
       <div className="flex mx-20 my-10 justify-center">
         {loading && (
-            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
-            </div>
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+          </div>
         )}
         <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
           {filteredTranscripts.map((transcript) => (
@@ -236,20 +206,22 @@ const Transcripts = ({ user, logout }) => {
               </dt>
               <div className="flex flex-col items-center justify-between w-full">
                 <dd className="mt-2 font-semibold text-xl flex flex-row justify-between w-full">
-                  <span className="w-1/2"><FontAwesomeIcon
-                    icon={faUserTie}
-                    className="mr-2"
-                    size="xl"
-                    style={{ color: "black" }}
-                  /></span>
-                  <span className="w-2/5">
-                  {transcript.user_name}
+                  <span className="w-1/2">
+                    <FontAwesomeIcon
+                      icon={faUserTie}
+                      className="mr-2"
+                      size="xl"
+                      style={{ color: "black" }}
+                    />
                   </span>
+                  <span className="w-2/5">{transcript.user_name}</span>
                 </dd>
                 {additionalFields.map((item) => (
                   <dd className="mt-2 leading-7 flex flex-row justify-between w-full">
                     <span className="w-1/2 text-black">{item.name}</span>
-                    <span className="w-2/5 text-white ">{transcript[item.apiname]?transcript[item.apiname]:""}</span>
+                    <span className="w-2/5 text-white ">
+                      {transcript[item.apiname] ? transcript[item.apiname] : ""}
+                    </span>
                   </dd>
                 ))}
               </div>
