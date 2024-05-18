@@ -36,10 +36,11 @@ const Transcripts = ({ user, logout }) => {
         let t = await response.json();
         setTranscripts(t);
         setFilteredTranscripts(t);
+        console.log("t++", t);
         if(t.length>0){
           const category = t[0].category;
           console.log('category++', category);
-          setadditionalFields(categoryAdditionalFields[category]);
+          setadditionalFields(categoryAdditionalFields[category].General);
           // console.log('additionalFields++', additionalFields);
         } 
       }
@@ -52,41 +53,68 @@ const Transcripts = ({ user, logout }) => {
   }, [router.query.slug])
 
   const categoryAdditionalFields = {
-    'UPSC': [
-      {name: 'Optional Subject',apiname:'optional_subject'},
-      {name: 'Gap Years',apiname:'gap_years'},
-      {name: 'Marks',apiname:'exam_scores'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'MBA': [
-      {name: 'Specialization',apiname:'specialization'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'CAT/GMAT Score',apiname:'exam_scores'},
-      {name: 'Year of Admission',apiname:'year_of_interview'}
-    ],
-    'VISA': [
-      {name: 'VISA Type',apiname:'visa_type'},
-      {name: 'Country Applied for VISA',apiname:'country_applied_for_visa'},
-      {name: 'Purpose of Travel',apiname:'purpose_of_travel'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Coding & Technical': [
-      {name: 'Programming Languages',apiname:'programming_languages'},
-      {name: 'Tech Stack Used',apiname:'tech_stack_used'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Indian Armed Forces': [
-      {name: 'Service Name',apiname:'service_name'},
-      {name: 'Branch',apiname:'branch'},
-      {name: 'Commission Type',apiname:'commision_type'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ],
-    'Bank PO': [
-      {name: 'Bank Name',apiname:'bankName'},
-      {name: 'Work Experience',apiname:'work_experience'},
-      {name: 'Year of Interview',apiname:'year_of_interview'}
-    ]
+    UPSC: {
+      General: [
+        { name: "Optional Subject", apiname: "optional_subject" },
+        { name: "Gap Years", apiname: "gap_years" },
+        { name: "Marks", apiname: "exam_scores" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+      "Civil Services": [
+        { name: "Optional Subject", apiname: "optional_subject" },
+        { name: "Gap Years", apiname: "gap_years" },
+        { name: "Marks", apiname: "exam_scores" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    MBA: {
+      General: [
+        { name: "Specialization", apiname: "specialization" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "CAT/GMAT Score", apiname: "exam_scores" },
+        { name: "Year of Admission", apiname: "year_of_interview" },
+      ],
+      "Internal MBA": [
+        { name: "Specialization", apiname: "specialization" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "CAT/GMAT Score", apiname: "exam_scores" },
+        { name: "Year of Admission", apiname: "year_of_interview" },
+      ],
+    },
+    VISA: {
+      General: [
+        { name: "VISA Type", apiname: "visa_type" },
+        {
+          name: "Country Applied for VISA",
+          apiname: "country_applied_for_visa",
+        },
+        { name: "Purpose of Travel", apiname: "purpose_of_travel" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Coding & Technical": {
+      General: [
+        { name: "Programming Languages", apiname: "programming_languages" },
+        { name: "Tech Stack Used", apiname: "tech_stack_used" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Indian Armed Forces": {
+      General: [
+        { name: "Service Name", apiname: "service_name" },
+        { name: "Branch", apiname: "branch" },
+        { name: "Commission Type", apiname: "commission_type" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
+    "Bank PO": {
+      General: [
+        { name: "Bank Name", apiname: "bankName" },
+        { name: "Work Experience", apiname: "work_experience" },
+        { name: "Year of Interview", apiname: "year_of_interview" },
+      ],
+    },
   };
 
   const handleReadMoreClick = (transcriptSlug) => {
@@ -105,34 +133,14 @@ const Transcripts = ({ user, logout }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const filtered = transcripts.filter((transcript) => {
-      const matchExamName = searchTerm.ExamName
-        ? transcript.interview_name
-            .toLowerCase()
-            .includes(searchTerm.ExamName.toLowerCase())
-        : true;
-      const matchGapYear =
-        searchTerm.gapYear !== ""
-          ? transcript.gap_years === Number(searchTerm.gapYear)
-          : true;
-      const matchYearOfInterview =
-        searchTerm.yearOfInterview !== ""
-          ? transcript.year_of_interview === Number(searchTerm.yearOfInterview)
-          : true;
-      const matchOptionalSubject =
-        searchTerm.optionalSubject !== ""
-          ? transcript.optional_subject === searchTerm.optionalSubject
-          : true;
-      const matchWorkExperience =
-        searchTerm.work_experience !== ""
-          ? transcript.work_experience === Number(searchTerm.work_experience)
-          : true;
-      return (
-        matchExamName &&
-        matchGapYear &&
-        matchYearOfInterview &&
-        matchOptionalSubject &&
-        matchWorkExperience
-      );
+      return additionalFields.every((field) => {
+        if (searchTerm[field.apiname]) {
+          return transcript[field.apiname]
+            ?.toLowerCase()
+            .includes(searchTerm[field.apiname].toLowerCase());
+        }
+        return true;
+      });
     });
     setFilteredTranscripts(filtered);
   };
@@ -158,63 +166,31 @@ const Transcripts = ({ user, logout }) => {
           enim? Rem obcaecati in eos.
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-wrap items-center justify-center  mt-4 text-black "
-      >
-        <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
-          <input
-            type="text"
-            name="ExamName"
-            value={searchTerm.ExamName}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="Exam Name"
-          />
-
-          <input
-            type="text"
-            name="optionalSubject"
-            value={searchTerm.optionalSubject}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="optionalSubject"
-          />
-          <input
-            type="text"
-            name="work_experience"
-            value={searchTerm.work_experience}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="work_experience"
-          />
-
-          <input
-            type="text"
-            name="gapYear"
-            value={searchTerm.gapYear}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="Gap Year"
-          />
-
-          <input
-            type="text"
-            name="yearOfInterview"
-            value={searchTerm.yearOfInterview}
-            onChange={handleChange}
-            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-            placeholder="yearOfInterview"
-          />
-          {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
-          >
-            Search
-          </button>
-        </div>
-      </form>
+      {additionalFields.length>0 && <form
+          onSubmit={handleSubmit}
+          className="flex flex-wrap items-center justify-center mt-4 text-black"
+        >
+          <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
+            {additionalFields && additionalFields.map((field) => (
+              <input
+                key={field.apiname}
+                type={field.name==="Gap Years" || field.name==="Marks" || field.name==="Year of Interview" || field.name==="CAT/GMAT Score" || field.name==="Year of Admission" || field.name==="Work Experience"?"number":"text"}
+                name={field.apiname}
+                value={searchTerm[field.apiname] || ""}
+                onChange={handleChange}
+                className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+                placeholder={field.name}
+              />
+            ))}
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+      }
 
       {/* <SearchBar placeholder="Search..." /> */}
 
