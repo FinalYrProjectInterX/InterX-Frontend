@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) => {
+const AdditionalInfo = ({
+  onSubmitAdditionalInfo,
+  handleBackFromExperience,
+}) => {
   const [showExperience, setShowExperience] = useState(true);
   const [showTips, setShowTips] = useState(false);
   const [showAdditionalInfo, setshowAdditionalInfo] = useState(false);
@@ -28,11 +31,7 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
   };
 
   const handleSubmit = () => {
-    onSubmitAdditionalInfo(
-      experience,
-      tips,
-      additionalInfo,
-    );
+    onSubmitAdditionalInfo(experience, tips, additionalInfo);
   };
   const handleAdditionalInfoChange = (event) => {
     setadditionalInfo(event.target.value);
@@ -43,14 +42,14 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
     setShowExperience(true);
     setShowTips(false);
     setshowAdditionalInfo(false);
-  }
+  };
 
   const handleBackFromAdditionalInfo = (event) => {
     event.preventDefault();
     setShowExperience(false);
     setShowTips(true);
     setshowAdditionalInfo(false);
-  }
+  };
 
   return (
     <div>
@@ -71,15 +70,18 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
           </div>
           <div className="flex flex-row justify-between items-center w-1/2">
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
-              onClick={(event)=>{event.preventDefault();handleBackFromExperience()}}
+              className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              onClick={(event) => {
+                event.preventDefault();
+                handleBackFromExperience();
+              }}
               type="button"
               data-ripple-light="true"
             >
               Back
             </button>
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
               onClick={handleExperienceSubmit}
               type="button"
               data-ripple-light="true"
@@ -107,7 +109,7 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
           </div>
           <div className="flex flex-row justify-between items-center w-1/2">
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
               onClick={handleBackFromTips}
               type="button"
               data-ripple-light="true"
@@ -115,7 +117,7 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
               Back
             </button>
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
               onClick={handleTipsSubmit}
               type="button"
               data-ripple-light="true"
@@ -142,7 +144,7 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
           </div>
           <div className="flex flex-row justify-between items-center w-1/2">
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none "
               onClick={handleBackFromAdditionalInfo}
               type="button"
               data-ripple-light="true"
@@ -150,7 +152,7 @@ const AdditionalInfo = ({ onSubmitAdditionalInfo, handleBackFromExperience }) =>
               Back
             </button>
             <button
-              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+              className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none "
               onClick={handleSubmit}
               type="button"
               data-ripple-light="true"

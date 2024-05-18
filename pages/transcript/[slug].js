@@ -13,7 +13,7 @@ const detailPage = ({ user, logout }) => {
   const [loading, setLoading] = useState(false);
   const [transcript, setTranscript] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       const response = await fetch(
@@ -38,9 +38,7 @@ const detailPage = ({ user, logout }) => {
     };
 
     fetchData();
-    
-    
-  }, [router.query.slug])
+  }, [router.query.slug]);
 
   return (
     <>
@@ -51,13 +49,15 @@ const detailPage = ({ user, logout }) => {
       )}
       <div className=" min-h-screen">
         <Navbar user={user} logout={logout} />
-        <div className={`w-[80%]  m-auto mt-20 mb-20 ${styles.transcript}`}>
+        <div className={`w-[80%]  m-auto mt-10 mb-20 ${styles.transcript}`}>
           <div className="flex flex-col text-center justify-center p-4">
-            <div className="font-bold  text-2xl py-2">
+            <div className="font-bold mb-4 text-2xl py-2">
               {transcript.interview_name}
             </div>
 
-            <div className={`grid grid-cols-4 gap-4  ${styles.container}`}>
+            <div
+              className={`grid grid-cols-4 gap-4 text-black ${styles.container}`}
+            >
               <div>{transcript.user_name}</div>
               <div>{transcript.work_experience} yrs Experience</div>
               <div>{transcript.year_of_interview}</div>
@@ -73,17 +73,18 @@ const detailPage = ({ user, logout }) => {
             <p className="text-2xl text-center font-bold py-2">
               Interview Transcripts
             </p>
-            {transcript.questions_answers && transcript.questions_answers.map((qa, index) => (
-              <div
-                key={index}
-                className={`flex flex-col items-start justify-center p-4  text-black ${styles.block}`}
-              >
-                <p className="text-xl font-bold py-2">Question {index + 1}</p>
-                <p className="text-lg">{qa.Question}</p>
-                <p className="text-xl font-bold py-2">Answer</p>
-                <p className="text-lg">{qa.Answer}</p>
-              </div>
-            ))}
+            {transcript.questions_answers &&
+              transcript.questions_answers.map((qa, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-col items-start justify-center p-4  text-black ${styles.block}`}
+                >
+                  <p className="text-xl font-bold py-2">Question {index + 1}</p>
+                  <p className="text-lg">{qa.Question}</p>
+                  <p className="text-xl font-bold py-2">Answer</p>
+                  <p className="text-lg">{qa.Answer}</p>
+                </div>
+              ))}
           </div>
 
           <hr className="w-[100%] border-solid border-1 border-white my-8" />
@@ -104,7 +105,6 @@ const detailPage = ({ user, logout }) => {
         <Footer />
       </div>
     </>
-    
   );
 };
 

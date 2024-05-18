@@ -12,11 +12,13 @@ const Navbar = ({ user, logout }) => {
       className={`flex flex-row items-center justify-between px-6 py-6 ${styles.navStyle}`}
     >
       <div className="text-5xl text-bold mx-8">
-        <h2>InterX</h2>
+        <Link href="/" className="">
+          <h2>InterX</h2>
+        </Link>
       </div>
       <div className="flex flex-row items-center justify-between">
         <div className="mx-4 text-xl">
-          <Link href="" className="">
+          <Link href="/" className="">
             About
           </Link>
         </div>
