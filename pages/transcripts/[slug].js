@@ -86,67 +86,67 @@ const Transcripts = ({ user, logout, transcripts }) => {
           rerum quam, commodi cum saepe possimus id incidunt laborum. Quas,
           enim? Rem obcaecati in eos.
         </p>
-
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-wrap items-center justify-center mt-4 text-black "
-        >
-          <div className="flex items-center w-full bg-gray-100 py-4 px-6 mb-4 rounded-lg">
-            <input
-              type="text"
-              name="ExamName"
-              value={searchTerm.ExamName}
-              onChange={handleChange}
-              className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-              placeholder="Exam Name"
-            />
-
-            <input
-              type="text"
-              name="optionalSubject"
-              value={searchTerm.optionalSubject}
-              onChange={handleChange}
-              className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-              placeholder="optionalSubject"
-            />
-            <input
-              type="text"
-              name="work_experience"
-              value={searchTerm.work_experience}
-              onChange={handleChange}
-              className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-              placeholder="work_experience"
-            />
-
-            <input
-              type="text"
-              name="gapYear"
-              value={searchTerm.gapYear}
-              onChange={handleChange}
-              className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-              placeholder="Gap Year"
-            />
-
-            <input
-              type="text"
-              name="yearOfInterview"
-              value={searchTerm.yearOfInterview}
-              onChange={handleChange}
-              className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
-              placeholder="yearOfInterview"
-            />
-            {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
-            >
-              Search
-            </button>
-          </div>
-        </form>
-
-        {/* <SearchBar placeholder="Search..." /> */}
       </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-wrap items-center justify-center  mt-4 text-black "
+      >
+        <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
+          <input
+            type="text"
+            name="ExamName"
+            value={searchTerm.ExamName}
+            onChange={handleChange}
+            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+            placeholder="Exam Name"
+          />
+
+          <input
+            type="text"
+            name="optionalSubject"
+            value={searchTerm.optionalSubject}
+            onChange={handleChange}
+            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+            placeholder="optionalSubject"
+          />
+          <input
+            type="text"
+            name="work_experience"
+            value={searchTerm.work_experience}
+            onChange={handleChange}
+            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+            placeholder="work_experience"
+          />
+
+          <input
+            type="text"
+            name="gapYear"
+            value={searchTerm.gapYear}
+            onChange={handleChange}
+            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+            placeholder="Gap Year"
+          />
+
+          <input
+            type="text"
+            name="yearOfInterview"
+            value={searchTerm.yearOfInterview}
+            onChange={handleChange}
+            className="flex-grow border border-gray-300 focus:outline-none py-2 px-4 mr-2 rounded"
+            placeholder="yearOfInterview"
+          />
+          {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+
+      {/* <SearchBar placeholder="Search..." /> */}
+
       <div className="flex mx-20 my-10 justify-center">
         <div className="grid grid-cols-3 gap-8 mx-20 my-20">
           {filteredTranscripts.map((transcript) => (
