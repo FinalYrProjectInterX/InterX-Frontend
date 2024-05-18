@@ -27,7 +27,7 @@ const DynamicCategories = ({ user, logout }) => {
   const router = useRouter();
   const [subCategories, setsubCategories] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
@@ -50,25 +50,27 @@ const DynamicCategories = ({ user, logout }) => {
   return (
     <>
       {loading && (
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
-          </div>
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+        </div>
       )}
       <div className="min-h-screen">
         <Navbar user={user} logout={logout} />
-        <div className="flex flex-col items-start justify-center my-12 mx-40">
+        <div className="flex flex-col items-center justify-center my-12 mx-40">
           <p className="text-4xl my-2">
-            Browse the Interview Scripts of Specific Category and give it a read!!
+            Browse the Interview Scripts of Specific Category and give it a
+            read!!
           </p>
-          <p className="text-xl my-2">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
-            nostrum! Minima veritatis velit asperiores fugit provident, dolore
-            rerum quam, commodi cum saepe possimus id incidunt laborum. Quas,
-            enim? Rem obcaecati in eos.
+          <p className="text-lg sm:text-xl my-2">
+            Discover firsthand experiences from successful candidates and gain
+            insights into the interview process.
+            <br></br>
+            Navigate through a variety of categories to find transcripts
+            tailored to your specific needs.
           </p>
         </div>
         <div className="flex mx-20 my-10">
-          <div className="grid grid-cols-3 gap-8 mx-20 my-20">
+          <div className="grid grid-cols-3 gap-8 ">
             {subCategories &&
               subCategories.map((item) => {
                 return <SubCategoryBlock key={item.id} item={item} />;

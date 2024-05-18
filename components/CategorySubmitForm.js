@@ -1,31 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import jsonData from '../JsonData/categories.json';
+import React, { useState, useEffect } from "react";
+import jsonData from "../JsonData/categories.json";
 
 const CategorySubmitForm = ({ onSubmitCategory }) => {
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedSubCategory, setSelectedSubCategory] = useState('');
-  const [clearedInterview, setClearedInterview] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [clearedInterview, setClearedInterview] = useState("");
   const [additionalFields, setAdditionalFields] = useState({});
-  const [categoryslug, setcategoryslug] = useState('');
-  const [urlslug, seturlslug] = useState('');
-  const [interviewMode, setinterviewMode] = useState('');
-  const [otherInfo, setotherInfo] = useState('');
+  const [categoryslug, setcategoryslug] = useState("");
+  const [urlslug, seturlslug] = useState("");
+  const [interviewMode, setinterviewMode] = useState("");
+  const [otherInfo, setotherInfo] = useState("");
   const [controlDisplay, setcontrolDisplay] = useState("none");
 
   const handleCategoryChange = (event) => {
     const categoryValue = event.target.value;
     setSelectedCategory(categoryValue);
     const foundCategory = jsonData.find((cat) => cat.name === categoryValue);
-    if(foundCategory){
+    if (foundCategory) {
       setcontrolDisplay("block");
       setcategoryslug(foundCategory.slug);
       const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
-      const temp = foundCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+      const formattedDate = currentDate
+        .toISOString()
+        .split("T")[0]
+        .replace(/-/g, "");
+      const temp =
+        foundCategory.slug +
+        "-" +
+        clearedInterview
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "") +
+        "-" +
+        formattedDate;
       seturlslug(temp);
     }
     // Reset subcategory and additional fields when category changes
-    setSelectedSubCategory('');
+    setSelectedSubCategory("");
     setAdditionalFields({});
   };
 
@@ -33,17 +44,33 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     const subCategoryValue = event.target.value;
     setSelectedSubCategory(subCategoryValue);
     const foundCategory = jsonData.find((cat) => cat.name === selectedCategory);
-    if(foundCategory){
+    if (foundCategory) {
       const subCategories = foundCategory.subCategories;
-      const subCategory = subCategories.find((subcat) => subcat.name === subCategoryValue);
-      if(subCategory){
+      const subCategory = subCategories.find(
+        (subcat) => subcat.name === subCategoryValue
+      );
+      if (subCategory) {
         setcategoryslug(subCategory.slug);
         const currentDate = new Date();
-        const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
-        const formattedTime = currentDate.toTimeString().split(' ')[0].replace(/:/g, '');
-        const timestamp = `${formattedDate}${formattedTime}`; 
-        const temp = subCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + timestamp;
-        console.log('urlSlug++', temp);
+        const formattedDate = currentDate
+          .toISOString()
+          .split("T")[0]
+          .replace(/-/g, "");
+        const formattedTime = currentDate
+          .toTimeString()
+          .split(" ")[0]
+          .replace(/:/g, "");
+        const timestamp = `${formattedDate}${formattedTime}`;
+        const temp =
+          subCategory.slug +
+          "-" +
+          clearedInterview
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9-]/g, "") +
+          "-" +
+          timestamp;
+        console.log("urlSlug++", temp);
         seturlslug(temp);
       }
     }
@@ -57,7 +84,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const handleAdditionalFieldChange = (event) => {
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
-    
+
     setAdditionalFields((prevFields) => ({
       ...prevFields,
       [fieldName]: fieldValue,
@@ -79,26 +106,52 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   };
 
   const categoryAdditionalFields = {
-    UPSC: ['Optional Subject', 'Gap Years', 'Marks', 'Year of Interview'],
-    MBA: ['Specialization', 'Work Experience', 'CAT/GMAT Score','Year of Admission'],
-    VISA: ['VISA Type', 'Country Applied for VISA', 'Purpose of Travel','Year of Interview'],
-    'Coding & Technical': ['Programming Languages', 'Tech Stack Used', 'Work Experience' ,'Year of Interview'],
-    'Indian Armed Forces': ['Service Name', 'Branch', 'Commission Type','Year of Interview'],
-    'Bank PO': ['Bank Name', 'Work Experience', 'Year of Interview'],
+    UPSC: ["Optional Subject", "Gap Years", "Marks", "Year of Interview"],
+    MBA: [
+      "Specialization",
+      "Work Experience",
+      "CAT/GMAT Score",
+      "Year of Admission",
+    ],
+    VISA: [
+      "VISA Type",
+      "Country Applied for VISA",
+      "Purpose of Travel",
+      "Year of Interview",
+    ],
+    "Coding & Technical": [
+      "Programming Languages",
+      "Tech Stack Used",
+      "Work Experience",
+      "Year of Interview",
+    ],
+    "Indian Armed Forces": [
+      "Service Name",
+      "Branch",
+      "Commission Type",
+      "Year of Interview",
+    ],
+    "Bank PO": ["Bank Name", "Work Experience", "Year of Interview"],
   };
 
   const hasSubCategories = (category) => {
     const foundCategory = jsonData.find((cat) => cat.name === category);
-    return foundCategory && foundCategory.subCategories && foundCategory.subCategories.length > 0;
+    return (
+      foundCategory &&
+      foundCategory.subCategories &&
+      foundCategory.subCategories.length > 0
+    );
   };
 
   const renderSubCategorySelect = () => {
     if (selectedCategory && hasSubCategories(selectedCategory)) {
-      const subCategories = jsonData.find((cat) => cat.name === selectedCategory).subCategories;
+      const subCategories = jsonData.find(
+        (cat) => cat.name === selectedCategory
+      ).subCategories;
       return (
-        <div className="mb-4 mt-8 text-black w-1/2">
+        <div className="mb-4 mt-3 text-black w-1/2">
           <select
-            className='shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+            className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             value={selectedSubCategory}
             onChange={handleSubCategoryChange}
           >
@@ -119,18 +172,32 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     if (selectedCategory) {
       const fieldsToRender = categoryAdditionalFields[selectedCategory] || [];
       return fieldsToRender.map((field) => (
-        <div key={field} className="mb-4 text-black w-1/2">
-          <label htmlFor={field} className="block text-sm font-medium text-white dark:text-gray-300 mb-2">{field}</label>
+        <div key={field} className="mb-2 text-black w-1/2">
+          <label
+            htmlFor={field}
+            className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
+          >
+            {field}
+          </label>
           <input
-            type={field === 'Gap Years' || field === 'Marks' || field === 'Year of Interview' || field === 'Year of Admission' || field === 'Work Experience' || field === 'CAT/GMAT Score' || field === '' ? 'number' : 'text'}
+            type={
+              field === "Gap Years" ||
+              field === "Marks" ||
+              field === "Year of Interview" ||
+              field === "Year of Admission" ||
+              field === "Work Experience" ||
+              field === "CAT/GMAT Score" ||
+              field === ""
+                ? "number"
+                : "text"
+            }
             id={field}
             name={field}
-            value={additionalFields[field] || ''}
+            value={additionalFields[field] || ""}
             onChange={handleAdditionalFieldChange}
             className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
-        
       ));
     }
     return null;
@@ -139,17 +206,23 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   const handleInterviewModeChange = (event) => {
     event.preventDefault();
     setinterviewMode(event.target.value);
-  }
+  };
 
   const handleOtherInformationChanges = (event) => {
     event.preventDefault();
     setotherInfo(event.target.value);
-  }
+  };
 
   return (
-    <div className='flex flex-col items-center justify-center'>
-      <div className="mb-4 text-black w-1/2">
-        <label htmlFor="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Enter the name of the interview you attended or the institute you interviewed with...</label>
+    <div className="flex flex-col items-center justify-center">
+      <div className="mb-4 mt-3 text-black w-1/2">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
+        >
+          Enter the name of the interview you attended or the institute you
+          interviewed with...
+        </label>
         <input
           type="text"
           id="name"
@@ -159,9 +232,9 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
           required
         />
       </div>
-      <div className="mb-4 mt-8 text-black w-1/2">
+      <div className="mb-4 mt-3 text-black w-1/2">
         <select
-          className='shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+          className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -180,24 +253,31 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       {/* Render additional fields based on selected category and subcategory */}
       {renderAdditionalFields()}
 
-      <div className="mb-4 mt-8 text-black w-1/2" style={{ display: controlDisplay }}>
+      <div
+        className="mb-4 mt-6 text-black w-1/2"
+        style={{ display: controlDisplay }}
+      >
         <select
-          className='shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+          className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={interviewMode}
           onChange={handleInterviewModeChange}
         >
           <option value="">Select Interview Mode</option>
-          <option value="Offline">
-            Offline
-          </option>
-          <option value="Online">
-            Online
-          </option>
+          <option value="Offline">Offline</option>
+          <option value="Online">Online</option>
         </select>
       </div>
 
-      <div className="mb-4 text-black w-1/2" style={{ display: controlDisplay }}>
-        <label htmlFor="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Other information about your profile</label>
+      <div
+        className="mb-4 mt-1 text-black w-1/2"
+        style={{ display: controlDisplay }}
+      >
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
+        >
+          Other information about your profile
+        </label>
         <input
           type="text"
           id="name"

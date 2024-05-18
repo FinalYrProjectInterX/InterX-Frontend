@@ -33,69 +33,65 @@ const Footer = () => {
                 Let's keep in touch!
               </h4>
               <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
-                Find us on any of these platforms, we respond 1-2 business days.
+                Find us on any of these platforms, we respond in 1-2 business
+                days.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
-                <button
-                  className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  {/* <i className="fab fa-twitter"></i> */}
-                  <FontAwesomeIcon
-                    icon={faTwitter}
-                    style={{ color: "#1DA1F2" }}
-                  />
-                </button>
-                <button
-                  className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  {/* <i className="fab fa-facebook-square"></i> */}
-                  <FontAwesomeIcon
-                    icon={faFacebook}
-                    style={{ color: "#3b5998" }}
-                  />
-                </button>
-                <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  {/* <i className="fab fa-dribbble"></i> */}
-                  <FontAwesomeIcon
-                    icon={faInstagram}
-                    style={{ color: "#C13584" }}
-                  />
-                </button>
-                <button
-                  className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  {/* <i className="fab fa-github"></i> */}
-                  <FontAwesomeIcon
-                    icon={faLinkedin}
-                    style={{ color: "#0077B5" }}
-                  />
-                </button>
-                <button
-                  className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                  type="button"
-                >
-                  {/* <i className="fab fa-github"></i> */}
-                  <FontAwesomeIcon icon={faGithub} style={{ color: "#333" }} />
-                </button>
+                <Link href="https://x.com">
+                  <button
+                    className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    {/* <i className="fab fa-twitter"></i> */}
+                    <FontAwesomeIcon
+                      icon={faTwitter}
+                      style={{ color: "#1DA1F2" }}
+                    />
+                  </button>
+                </Link>
+                <Link href="https://in.linkedin.com">
+                  <button
+                    className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    {/* <i className="fab fa-github"></i> */}
+                    <FontAwesomeIcon
+                      icon={faLinkedin}
+                      style={{ color: "#0077B5" }}
+                    />
+                  </button>
+                </Link>
+                <Link href="https://github.com">
+                  <button
+                    className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                    type="button"
+                  >
+                    {/* <i className="fab fa-github"></i> */}
+                    <FontAwesomeIcon
+                      icon={faGithub}
+                      style={{ color: "#333" }}
+                    />
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="flex flex-wrap items-top mb-6">
                 <div className="w-full lg:w-4/12 px-4 ml-auto">
-                  <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
-                    Useful Links
-                  </span>
-                  <ul className="list-unstyled">
+                  <span className="font-semibold ">LINKS</span>
+                  <ul className="list-unstyled mt-2">
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                        href="/read"
+                      >
+                        Read
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="/"
                       >
                         About Us
                       </a>
@@ -103,25 +99,9 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://blog.creative-tim.com?ref=njs-profile"
+                        href="/contribute"
                       >
-                        Blog
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
-                      >
-                        Github
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
-                      >
-                        Free Products
+                        Contribute
                       </a>
                     </li>
                   </ul>
@@ -158,7 +138,7 @@ const Footer = () => {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/contact-us?ref=njs-profile"
+                        href="https://www.linkedin.com/in/umang-jain-232742195/"
                       >
                         Contact Us
                       </a>
