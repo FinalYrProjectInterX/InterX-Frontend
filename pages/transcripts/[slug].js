@@ -23,6 +23,7 @@ const Transcripts = ({ user, logout }) => {
   const [filteredTranscripts, setFilteredTranscripts] = useState([]);
   const [isHeartFilled, setIsHeartFilled] = useState(false);
   const [searchTerm, setSearchTerm] = useState({});
+  const [likedTranscripts, setLikedTranscripts] = useState({});
 
   useEffect(() => {
     setLoading(true);
@@ -212,6 +213,10 @@ const Transcripts = ({ user, logout }) => {
   const handleLikeClick = async(id) => {
     setLoading(true);
     setIsHeartFilled(true);
+    setLikedTranscripts((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
     const response = await fetch(`${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/like/${id}`, {
       method: 'PUT',
       headers: {
@@ -339,7 +344,7 @@ const Transcripts = ({ user, logout }) => {
                   Read More
                 </button>
                 <span className="relative right-0">
-                  <FontAwesomeIcon icon={faHeart} className="relative right-0" style={{ color: isHeartFilled ? 'red' : 'white'}} onClick={(event)=>{event.preventDefault();handleLikeClick(transcript._id); transcript.rating=transcript.rating+1}} />
+                  <FontAwesomeIcon icon={faHeart} className="relative right-0" style={{ color: likedTranscripts[transcript._id] ? 'red' : 'white', cursor: 'pointer'}} onClick={(event)=>{event.preventDefault();handleLikeClick(transcript._id); transcript.rating=transcript.rating+1}} />
                 </span>
               </div>
             </Link>
