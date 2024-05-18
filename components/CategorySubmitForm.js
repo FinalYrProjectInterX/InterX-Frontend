@@ -40,7 +40,10 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
         setcategoryslug(subCategory.slug);
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().split('T')[0].replace(/-/g, '');
-        const temp = subCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + formattedDate;
+        const formattedTime = currentDate.toTimeString().split(' ')[0].replace(/:/g, '');
+        const timestamp = `${formattedDate}${formattedTime}`; 
+        const temp = subCategory.slug + '-' + clearedInterview.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '-' + timestamp;
+        console.log('urlSlug++', temp);
         seturlslug(temp);
       }
     }
