@@ -9,14 +9,26 @@ import Footer from "@/components/Footer";
 
 const CategoryBlock = ({ item }) => {
   return (
-    <Link
+    item.subCategories.length!=0?<Link
       href={`/category/${item.slug}`}
       className={`flex flex-col items-center ${indexStyle.blockstyle} p-6`}
     >
       <dt className="mt-4 font-semibold text-xl sm:text-2xl lg:text-3xl">
         {item.name}
       </dt>
-      <dd className="mt-2 leading-7 text-center text-white">
+      <dd className="mt-2 leading-7 text-center text-gray-400">
+        {item.description}
+      </dd>
+      <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
+    </Link>:
+    <Link
+      href={`/transcripts/${item.slug}`}
+      className={`flex flex-col items-center ${indexStyle.blockstyle}`}
+    >
+      <dt className="mt-4 font-semibold text-xl sm:text-2xl lg:text-3xl">
+        {item.name}
+      </dt>
+      <dd className="mt-2 leading-7 text-center text-gray-400">
         {item.description}
       </dd>
       <FontAwesomeIcon icon={faArrowRight} className="mt-4" />
