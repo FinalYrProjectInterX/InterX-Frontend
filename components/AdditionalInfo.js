@@ -55,7 +55,7 @@ const AdditionalInfo = ({
     <div>
       {showExperience && (
         <div className=" flex flex-col items-center justify-center">
-          <div className="mb-4 mt-8  text-black w-1/2 ">
+          <div className="mb-4 mt-8  text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
             <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
               Experience
             </label>
@@ -68,7 +68,7 @@ const AdditionalInfo = ({
               required
             />
           </div>
-          <div className="flex flex-row justify-between items-center w-1/2">
+          <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
             <button
               className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
               onClick={(event) => {
@@ -94,7 +94,7 @@ const AdditionalInfo = ({
 
       {showTips && (
         <div className=" flex flex-col items-center justify-center">
-          <div className="mb-4 mt-8  text-black w-1/2 ">
+          <div className="mb-4 mt-8  text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
             <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
               Tips
             </label>
@@ -107,7 +107,7 @@ const AdditionalInfo = ({
               required
             />
           </div>
-          <div className="flex flex-row justify-between items-center w-1/2">
+          <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
             <button
               className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
               onClick={handleBackFromTips}
@@ -129,7 +129,7 @@ const AdditionalInfo = ({
       )}
       {showAdditionalInfo && (
         <div className=" flex flex-col items-center justify-center">
-          <div className="mb-4 mt-8  text-black w-1/2 ">
+          <div className="mb-4 mt-8  text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
             <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
               Additional Info
             </label>
@@ -142,7 +142,7 @@ const AdditionalInfo = ({
               required
             />
           </div>
-          <div className="flex flex-row justify-between items-center w-1/2">
+          <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
             <button
               className="my-6 block w-full ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none "
               onClick={handleBackFromAdditionalInfo}

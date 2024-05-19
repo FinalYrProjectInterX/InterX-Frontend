@@ -438,11 +438,11 @@ const contribute = ({ user, logout }) => {
       <div className="h-auto">
         <ToastContainer />
         <Navbar user={user} logout={logout} />
-        <div className="flex flex-col items-center justify-center mb-8 mx-40">
-          <p className="text-4xl my-2">
+        <div className="flex flex-col items-center justify-center mb-8 md:mx-40">
+          <p className="text-2xl md:text-4xl my-2 text-center">
             Thanks for adding value to millions of interviewees!!
           </p>
-          <p className="text-xl my-2 text-center">
+          <p className="text-lg md:text-xl my-2 text-center">
             Fill out the details of your profile at the time of the interview
             for other aspirants to filter out this transcripts very easily
           </p>
@@ -461,7 +461,7 @@ const contribute = ({ user, logout }) => {
         </div>
         <div className="" style={{ display: ImageProofDisplay }}>
           <div className=" flex flex-col items-center justify-center">
-            <div className="mb-4 mt-8  text-white w-1/2 ">
+            <div className="mb-4 mt-8  text-white w-[90%] mx-5 md:mx-0 md:w-1/2 ">
               <label className="block text-xl font-medium text-white dark:text-gray-300 mb-2">
                 Upload Proof of Interview(Email ScreenShot/ Call Letter)
               </label>
@@ -473,7 +473,7 @@ const contribute = ({ user, logout }) => {
               />
             </div>
             <button
-              className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="my-6 block w-[90%] mx-5 md:mx-0 md:w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               onClick={handleSubmit}
             >
               Submit

@@ -121,8 +121,8 @@ const Home = ({ user, logout }) => {
   return (
     <div className={`min-h-screen flex flex-col ${styles.himani} w-full`}>
       <Navbar user={user} logout={logout} />
-      <div className="flex-grow flex justify-between my-20 ml-52 mr-48 ">
-        <div className="flex flex-col mt-8">
+      <div className="flex-grow flex flex-col md:flex-row justify-between my-12 md:ml-56 md:mr-48">
+        <div className="flex flex-col mt-12 items-center md:items-start">
           <h2 className="text-6xl">
             Prepare
           </h2>
@@ -130,7 +130,7 @@ const Home = ({ user, logout }) => {
           </h2>
           <h2 className="text-6xl mt-2">interviews
           </h2>
-          <p className="text-lg mt-8">
+          <p className="text-center md:text-left text-lg mt-8">
             One stop platform for all the interview experiences
           </p>
 
@@ -149,8 +149,8 @@ const Home = ({ user, logout }) => {
             </Link>
           </div>
         </div>
-        <div className="mr-28 mb-20 flex justify-center">
-          <Image src={img} height={400} width={400} />
+        <div className="hidden md:flex mb-20 justify-center">
+          <Image src={img} />
         </div>
       </div>
     </div>

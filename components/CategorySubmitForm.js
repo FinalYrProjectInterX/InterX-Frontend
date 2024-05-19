@@ -149,7 +149,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
         (cat) => cat.name === selectedCategory
       ).subCategories;
       return (
-        <div className="mb-4 mt-3 text-black w-1/2">
+        <div className="mb-4 mt-3 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
           <select
             className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             value={selectedSubCategory}
@@ -172,7 +172,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     if (selectedCategory) {
       const fieldsToRender = categoryAdditionalFields[selectedCategory] || [];
       return fieldsToRender.map((field) => (
-        <div key={field} className="mb-2 text-black w-1/2">
+        <div key={field} className="mb-2 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
           <label
             htmlFor={field}
             className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
@@ -215,7 +215,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="mb-4 mt-3 text-black w-1/2">
+      <div className="mb-4 mt-3 text-black mx-5 md:mx-0 md:w-1/2">
         <label
           htmlFor="name"
           className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
@@ -232,7 +232,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
           required
         />
       </div>
-      <div className="mb-4 mt-3 text-black w-1/2">
+      <div className="mb-4 mt-3 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
         <select
           className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={selectedCategory}
@@ -254,7 +254,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       {renderAdditionalFields()}
 
       <div
-        className="mb-4 mt-6 text-black w-1/2"
+        className="mb-4 mt-6 text-black w-[90%] mx-5 md:mx-0 md:w-1/2"
         style={{ display: controlDisplay }}
       >
         <select
@@ -269,7 +269,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       </div>
 
       <div
-        className="mb-4 mt-1 text-black w-1/2"
+        className="mb-4 mt-1 text-black w-[90%] mx-5 md:mx-0 md:w-1/2"
         style={{ display: controlDisplay }}
       >
         <label
@@ -289,7 +289,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
       </div>
 
       <button
-        className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        className="my-6 block w-[90%] mx-5 md:mx-0 md:w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         onClick={handleSubmit}
         type="button"
         data-ripple-light="true"

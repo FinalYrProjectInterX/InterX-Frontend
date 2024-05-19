@@ -26,7 +26,7 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="mb-4 text-black w-1/2">
+      <div className="mb-4 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
         <label
           for="question"
           className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
@@ -44,7 +44,7 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           required
         />
       </div>
-      <div className="mb-4 text-black w-1/2">
+      <div className="mb-4 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
         <label
           for="answer"
           className="block text-sm font-medium text-white dark:text-gray-300 mb-2"
@@ -62,7 +62,7 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           required
         />
       </div>
-      <div className="flex flex-row justify-between items-center w-1/2">
+      <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
         <button
           className="my-6 block mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
           onClick={onSubmitQuestion}
@@ -80,9 +80,9 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           Continue
         </button>
       </div>
-      <div className="flex flex-row justify-between items-center w-1/2">
+      <div className="flex flex-row justify-between items-center w-full mx-5 md:mx-0 md:w-1/2">
         <button
-          className="my-3 block  mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+          className="my-3 block  mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full"
           onClick={(event) => {
             event.preventDefault();
             handleBackFromQA();
