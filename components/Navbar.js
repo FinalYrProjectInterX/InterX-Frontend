@@ -151,7 +151,7 @@ const Navbar = ({ user, logout }) => {
     <nav className="px-8 py-6 rounded">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" className="flex items-center">
-          <span className="md:text-5xl md:text-bold self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="md:text-5xl md:text-bold self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             InterX
           </span>
         </a>

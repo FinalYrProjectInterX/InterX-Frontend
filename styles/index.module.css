@@ -13,7 +13,7 @@
 
 .transcript{
   background-image: linear-gradient(rgba(19, 12, 61, 1),rgba(92, 114, 131, 1));
-  padding: 17px;
+  /* padding: 17px; */
   border-radius:30px;
 }
 .container > div {
