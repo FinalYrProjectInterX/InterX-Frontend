@@ -86,7 +86,7 @@ const login = ({user}) => {
             onClick={togglePasswordVisibility}
           >
             {isPasswordVisible ? '🙈' : '👁️'}
-          </button>
+          </button> 
         </div>
         <button
           className="my-6 block w-1/2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-lg font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
