@@ -80,9 +80,9 @@ const detailPage = ({ user, logout }) => {
                   className={`flex flex-col items-start justify-center p-4 text-black ${styles.block}`}
                 >
                   <p className="text-lg md:text-xl font-bold py-2">Question {index + 1}</p>
-                  <p className="text-sm md:text-lg">{qa.Question}</p>
+                  <p className="text-lg">{qa.Question}</p>
                   <p className="text-lg md:text-xl font-bold py-2">Answer</p>
-                  <p className="text-sm md:text-lg">{qa.Answer}</p>
+                  <p className="text-lg">{qa.Answer}</p>
                 </div>
               ))}
           </div>
@@ -91,14 +91,14 @@ const detailPage = ({ user, logout }) => {
           <div
             className={`flex flex-col items-start justify-center p-4  text-black  ${styles.block}`}
           >
-            <p className="text-xl font-bold py-2">My Experience</p>
+            <p className="text-lg md:text-xl font-bold py-2">My Experience</p>
             <p className="text-lg">{transcript.interview_experience}</p>
           </div>
           <hr className="w-[100%] border-solid border-1 border-white  my-8" />
           <div
             className={`flex flex-col items-start justify-center p-4 text-black  ${styles.block}`}
           >
-            <p className="text-xl font-bold py-2">Tips & Suggestions</p>
+            <p className="text-lg md:text-xl font-bold py-2">Tips & Suggestions</p>
             <p className="text-lg">{transcript.interview_tips}</p>
           </div>
         </div>
