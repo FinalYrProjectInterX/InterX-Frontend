@@ -62,9 +62,9 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           required
         />
       </div>
-      <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
+      <div className="flex flex-col md:flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
         <button
-          className="my-6 block mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+          className="my-3 md:my-6 block md:mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full md:w-1/2"
           onClick={onSubmitQuestion}
           type="button"
           data-ripple-light="true"
@@ -72,7 +72,7 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           Add Next Question
         </button>
         <button
-          className="my-6 block  ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-1/2"
+          className="md:my-6 block md:ml-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full md:w-1/2"
           onClick={onSubmitFinal}
           type="button"
           data-ripple-light="true"
@@ -80,9 +80,9 @@ const QAForm = ({ onSubmit, handleBackFromQA }) => {
           Continue
         </button>
       </div>
-      <div className="flex flex-row justify-between items-center w-full mx-5 md:mx-0 md:w-1/2">
+      <div className="flex flex-row justify-between items-center w-[90%] mx-5 md:mx-0 md:w-1/2">
         <button
-          className="my-3 block  mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full"
+          className="my-3 block md:mr-2 select-none rounded-lg bg-white py-2 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-full"
           onClick={(event) => {
             event.preventDefault();
             handleBackFromQA();
