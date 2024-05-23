@@ -176,7 +176,7 @@ const Navbar = ({ user, logout }) => {
         </div>
 
         <div
-      className={`w-full md:w-auto hidden absolute top-[12vh] left-0 bg-black bg-opacity-75 z-50`}
+      className={`w-full md:w-auto hidden absolute top-[11vh] left-0 bg-black z-50`}
       id="mobile-menu"
     >
       <ul className="flex flex-col md:flex-row md:space-x-8 md:mt-0 md:text-xl md:font-medium">
