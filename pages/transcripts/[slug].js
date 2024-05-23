@@ -75,9 +75,9 @@ const Transcripts = ({ user, logout }) => {
     },
     MBA: {
       General: [
+        { name: "College Name", apiname: "interview_name" },
         { name: "Specialization", apiname: "specialization" },
         { name: "Work Experience", apiname: "work_experience" },
-        { name: "CAT/GMAT Score", apiname: "exam_scores" },
         { name: "Year of Admission", apiname: "year_of_interview" },
       ],
       "Internal MBA": [
@@ -137,9 +137,9 @@ const Transcripts = ({ user, logout }) => {
     },
     MBA: {
       General: [
+        { name: "College Name", apiname: "interview_name" },
         { name: "Specialization", apiname: "specialization" },
         { name: "Work Experience", apiname: "work_experience" },
-        { name: "CAT/GMAT Score", apiname: "exam_scores" },
         { name: "Year of Admission", apiname: "year_of_interview" },
       ],
       "Internal MBA": [
