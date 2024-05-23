@@ -278,9 +278,9 @@ const index = ({user, logout}) => {
       <div className="h-auto">
         <ToastContainer />
         <Navbar user={user} logout={logout} />
-        <div className="flex flex-col items-start justify-center my-12 mx-40">
-          <p className="text-4xl my-2">Welcome to the Admin Dashboard.</p>
-          <p className="text-xl my-2">
+        <div className="flex flex-col items-center justify-center mx-5 md:mx-0">
+          <p className="text-2xl sm:text-3xl lg:text-4xl mt-10 text-center">Welcome to the Admin Dashboard.</p>
+          <p className="text-lg sm:text-xl my-2 mt-4 text-center">
             Here, you can review, approve, or reject user-submitted interview
             transcripts to ensure quality and authenticity. Maintain the
             integrity of our platform by managing the content effectively.

@@ -213,42 +213,44 @@ const Transcripts = ({ user, logout }) => {
   const handleLikeClick = async (id) => {
     setLoading(true);
     setIsHeartFilled(true);
-    setLikedTranscripts((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/like/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    if(!likedTranscripts[id]){
+      setLikedTranscripts((prevState) => ({
+        ...prevState,
+        [id]: true,
+      }));
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/like/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status == 200) {
+        // toast.success("Success!!", {
+        //   position: "top-left",
+        //   autoClose: 3000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
+        console.log("rating improved successfully!!");
+      } else {
+        toast.error("Some Error Occured!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
-    );
-    if (response.status == 200) {
-      // toast.success("Success!!", {
-      //   position: "top-left",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
-      console.log("rating improved successfully!!");
-    } else {
-      toast.error("Some Error Occured!!", {
-        position: "top-left",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     }
     setLoading(false);
   };
@@ -258,10 +260,10 @@ const Transcripts = ({ user, logout }) => {
       <ToastContainer />
       <Navbar user={user} logout={logout} />
       <div className="flex flex-col items-center justify-center lg:my-12 lg:mx-40">
-        <p className="text-base sm:text-xl lg:text-2xl my-2">
+        <p className="text-2xl sm:text-3xl lg:text-4xl mt-10 text-center">
           Browse the Interview Scripts of Specific Category and give it a read!!
         </p>
-        <p className="text-sm sm:text-base lg:text-lg my-2">
+        <p className="text-sm sm:text-base lg:text-lg my-2 text-center">
           Discover firsthand experiences from successful candidates and gain
           insights into the interview process.
           <br></br>
@@ -274,7 +276,7 @@ const Transcripts = ({ user, logout }) => {
           onSubmit={handleSubmit}
           className="flex flex-wrap items-center justify-center mt-4 text-black"
         >
-          <div className="flex items-center w-auto bg-gray-100 py-4 px-6 mb-4 rounded-lg">
+          <div className="flex flex-col md:flex-row items-center w-auto md:bg-gray-100 py-4 px-6 mb-4 rounded-lg">
             {additionalFields &&
               additionalFields.map((field) => (
                 <input
@@ -292,13 +294,13 @@ const Transcripts = ({ user, logout }) => {
                   name={field.apiname}
                   value={searchTerm[field.apiname] || ""}
                   onChange={handleChange}
-                  className="flex-grow border border-gray-300  focus:outline-none py-2 px-4 mr-2 rounded w-full"
+                  className="flex-grow border border-gray-300  focus:outline-none py-2 px-4 md:mr-2 rounded w-full my-2 md:my-0"
                   placeholder={field.name}
                 />
               ))}
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 ml-2 rounded w-1/4"
+              className="bg-gradient-to-r from-blue-900 to-blue-500 text-white font-bold py-2 px-4 md:ml-2 rounded w-full md:w-1/4 my-2 md:my-0"
             >
               Search
             </button>
