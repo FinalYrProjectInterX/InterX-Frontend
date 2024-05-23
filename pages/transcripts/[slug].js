@@ -191,6 +191,7 @@ const Transcripts = ({ user, logout }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const filtered = transcripts.filter((transcript) => {
       return additionalFields.every((field) => {
         if (searchTerm[field.apiname]) {
@@ -202,6 +203,7 @@ const Transcripts = ({ user, logout }) => {
       });
     });
     setFilteredTranscripts(filtered);
+    setLoading(false);
   };
   const handleChange = (e) => {
     setSearchTerm({

@@ -58,10 +58,10 @@ const detailPage = ({ user, logout }) => {
             <div
               className={`grid grid-cols-2 md:grid-cols-4 gap-4 text-black ${styles.container}`}
             >
-              <div>{transcript.user_name}</div>
-              <div>{transcript.work_experience} yrs Experience</div>
-              <div>{transcript.year_of_interview}</div>
-              <div>{transcript.specialization}</div>
+              <div>{transcript.user_name ? transcript.user_name : "--"}</div>
+              <div>{transcript.work_experience ? `${transcript.work_experience} yrs Experience` : "--"} </div>
+              <div>{transcript.year_of_interview ? transcript.year_of_interview : "-"}</div>
+              <div>{transcript.specialization ? transcript.specialization : "--"}</div>
             </div>
           </div>
           <hr className="w-[100%] border-solid border-1 border-white my-5" />
