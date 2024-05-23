@@ -216,7 +216,7 @@ const Transcripts = ({ user, logout }) => {
     if(!likedTranscripts[id]){
       setLikedTranscripts((prevState) => ({
         ...prevState,
-        [id]: true,
+        [id]: !prevState[id],
       }));
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/like/${id}`,
@@ -239,6 +239,45 @@ const Transcripts = ({ user, logout }) => {
         //   theme: "light",
         // });
         console.log("rating improved successfully!!");
+      } else {
+        toast.error("Some Error Occured!!", {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+    else{
+      setLikedTranscripts((prevState) => ({
+        ...prevState,
+        [id]: !prevState[id],
+      }));
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_FASTAPI_PUBLIC_HOST}/transcripts/unlike/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status == 200) {
+        // toast.success("Success!!", {
+        //   position: "top-left",
+        //   autoClose: 3000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
+        console.log("rating decreased successfully!!");
       } else {
         toast.error("Some Error Occured!!", {
           position: "top-left",
@@ -367,8 +406,8 @@ const Transcripts = ({ user, logout }) => {
                     }}
                     onClick={(event) => {
                       event.preventDefault();
+                      !likedTranscripts[transcript._id]?transcript.rating = transcript.rating + 1:transcript.rating = transcript.rating - 1;
                       handleLikeClick(transcript._id);
-                      transcript.rating = transcript.rating + 1;
                     }}
                   />
                 </span>
