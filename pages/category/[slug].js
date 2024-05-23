@@ -59,11 +59,11 @@ const DynamicCategories = ({ user, logout }) => {
       <div className="min-h-screen">
         <Navbar user={user} logout={logout} />
         <div class="flex flex-col items-center justify-center lg:my-12 lg:mx-40 ">
-          <p class="text-base sm:text-xl lg:text-2xl my-2">
+          <p class="text-2xl sm:text-3xl lg:text-4xl mt-10 text-center">
             Browse the Interview Scripts of Specific Category and give it a
             read!!
           </p>
-          <p class="text-sm sm:text-base lg:text-lg my-2">
+          <p class="text-sm sm:text-base lg:text-lg my-2 text-center">
             Discover firsthand experiences from successful candidates and gain
             insights into the interview process.
             <br />
@@ -71,7 +71,7 @@ const DynamicCategories = ({ user, logout }) => {
             tailored to your specific needs.
           </p>
         </div>
-        <div className="flex mx-20 my-10">
+        <div className="flex mx-10 md:mx-20 my-10 md:my-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {subCategories &&
               subCategories.map((item) => {

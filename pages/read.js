@@ -46,11 +46,11 @@ const read = ({ user, logout }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar user={user} logout={logout} />
-      <div className="flex flex-col items-center justify-center  ">
-        <p className="text-2xl sm:text-3xl lg:text-4xl mt-10">
+      <div className="flex flex-col items-center justify-center mx-5 md:mx-0">
+        <p className="text-2xl sm:text-3xl lg:text-4xl mt-10 text-center">
           Browse the Interview Scripts of Specific Category and give it a read!!
         </p>
-        <p className="text-lg sm:text-xl my-2 mt-4 ">
+        <p className="text-lg sm:text-xl my-2 mt-4 text-center">
           Discover firsthand experiences from successful candidates and gain
           insights into the interview process.
           <br></br>

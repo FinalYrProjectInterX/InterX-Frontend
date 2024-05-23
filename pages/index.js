@@ -123,9 +123,9 @@ const Home = ({ user, logout }) => {
       <Navbar user={user} logout={logout} />
       <div className="flex-grow flex flex-col md:flex-row justify-between my-12 md:ml-56 md:mr-48">
         <div className="flex flex-col mt-12 items-center md:items-start">
-          <h2 className="text-6xl">Prepare</h2>
-          <h2 className="text-6xl mt-2">for your</h2>
-          <h2 className="text-6xl mt-2">interviews</h2>
+          <span className="text-4xl md:text-6xl">Prepare</span>
+          <span className="text-4xl md:text-6xl mt-2">for your</span>
+          <span className="text-4xl md:text-6xl mt-2">interviews</span>
           <p className="text-center md:text-left text-lg mt-8">
             One stop platform for all the interview experiences
           </p>
@@ -133,13 +133,13 @@ const Home = ({ user, logout }) => {
           <div className=" justify-center mt-8 space-x-4">
             <Link
               href="/read"
-              className="px-10 py-3 bg-gray-300 text-black rounded-xl text-xl"
+              className="px-7 md:px-10 py-3 bg-gray-300 text-black rounded-xl text-lg md:text-xl"
             >
               Read
             </Link>
             <Link
               href="/contribute"
-              className="px-10 py-3 bg-gray-300 text-black rounded-xl text-xl"
+              className="px-7 md:px-10 py-3 bg-gray-300 text-black rounded-xl text-lg md:text-xl"
             >
               Contribute
             </Link>
