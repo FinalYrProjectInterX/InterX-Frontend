@@ -285,7 +285,7 @@ const index = ({user, logout}) => {
             transcripts to ensure quality and authenticity. Maintain the
             integrity of our platform by managing the content effectively.
           </p>
-          <div className="container mx-auto p-4">
+          {/* <div className="container mx-auto p-4">
             {additionalFields.length>0 && <form
                 onSubmit={handleSubmit}
                 className="flex flex-wrap items-center justify-center mt-4 text-black"
@@ -311,18 +311,17 @@ const index = ({user, logout}) => {
                 </div>
               </form>
             }
-            {/* <SearchBar placeholder="Search..." /> */}
-          </div>
+          </div> */}
         </div>
-        <div className="flex mx-20 my-10 justify-center">
-          <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
+        <div className="flex flex-col items-center mx-4 sm:mx-10 lg:mx-20 my-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {transcripts.map((transcript) => (
               <Link
                 key={transcript._id}
                 href={`/admin/transcript/${transcript.slug}`}
-                className={`flex flex-col items-center ${indexStyle.blockstyle}`}
+                className={`flex flex-col items-center ${indexStyle.blockstyle} p-6`}
               >
-                <dt className="mt-4 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
+                <dt className="mt-4 font-semibold text-xl text-center mb-4 overflow-hidden h-[5vh]">
                   {transcript.interview_name}
                 </dt>
                 <div className="flex flex-col items-center justify-between w-full">
@@ -331,7 +330,7 @@ const index = ({user, logout}) => {
                       <FontAwesomeIcon
                         icon={faUserTie}
                         className="mr-2"
-                        size="xl"
+                        size="lg"
                         style={{ color: "black" }}
                       />
                     </span>

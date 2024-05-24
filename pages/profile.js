@@ -195,8 +195,8 @@ const profile = ({user, logout}) => {
       <div className="flex flex-row items-start justify-between w-[80%] m-auto my-8">
         <p className="text-4xl my-2">Transcripts</p>
       </div>
-      {transcripts.length>0 && <div className="flex mx-20 my-5 justify-center">
-        <div className="grid grid-cols-3 gap-8 mx-20 my-20 w-full">
+      {transcripts.length>0 && <div className="flex flex-col items-center mx-4 sm:mx-10 lg:mx-20 my-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {transcripts.map((transcript) => (
             <div
               key={transcript._id}
@@ -208,15 +208,15 @@ const profile = ({user, logout}) => {
               >
                 <FontAwesomeIcon icon={faTrashAlt} size="lg" />
               </button>
-              <dt className="mt-8 font-semibold text-2xl text-center mb-4 overflow-hidden h-[5vh]">
+              <dt className="mt-4 font-semibold text-xl text-center mb-4 overflow-hidden h-[5vh]">
                 {transcript.interview_name}
               </dt>
               <div className="flex flex-col items-center justify-between w-full">
-                <dd className="mt-2 font-semibold text-xl flex flex-row justify-between w-full">
+                <dd className="mt-2 font-semibold text-lg flex justify-between w-full">
                   <span className="w-1/2"><FontAwesomeIcon
                     icon={faUserTie}
                     className="mr-2"
-                    size="xl"
+                    size="lg"
                     style={{ color: "black" }}
                   /></span>
                   <span className="w-2/5">

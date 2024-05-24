@@ -73,7 +73,7 @@ const login = ({user, logout}) => {
       <div className='flex flex-col items-center justify-center h-[85vh]'>
         <div className="mb-4 text-black w-[90%] mx-5 md:mx-0 md:w-1/2">
           <label for="name" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Email</label>
-          <input type="text" id="name" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Jen bazos" onChange={handleEmailChange} required />
+          <input type="text" id="name" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="user@example.com" onChange={handleEmailChange} required />
         </div>
         <div className="mb-4 text-black w-[90%] mx-5 md:mx-0 md:w-1/2 relative">
           <label htmlFor="password" className="block text-sm font-medium text-white dark:text-gray-300 mb-2">Password</label>
@@ -81,7 +81,7 @@ const login = ({user, logout}) => {
             type={isPasswordVisible ? "text" : "password"}
             id="password"
             className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="your@email.com"
+            placeholder="Enter your password..."
             onChange={handlePasswordChange}
             required
           />
