@@ -62,7 +62,7 @@ const profile = ({user, logout}) => {
     setname(name);
   };
   const handleAboutChange = (about) => {
-    setemail(about);
+    setabout(about);
   };
   const handlePasswordChange = (passwd) => {
     setpassword(passwd);
