@@ -106,7 +106,7 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
   };
 
   const categoryAdditionalFields = {
-    UPSC: ["Optional Subject", "Gap Years", "Marks", "Year of Interview"],
+    UPSC: ["Optional Subject", "Gap Years", "Year of Interview"],
     MBA: [
       "Specialization",
       "Work Experience",
@@ -121,7 +121,6 @@ const CategorySubmitForm = ({ onSubmitCategory }) => {
     ],
     "Coding & Technical": [
       "Programming Languages",
-      "Tech Stack Used",
       "Work Experience",
       "Year of Interview",
     ],

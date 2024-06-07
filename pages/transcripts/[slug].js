@@ -63,13 +63,13 @@ const Transcripts = ({ user, logout }) => {
       General: [
         { name: "Optional Subject", apiname: "optional_subject" },
         { name: "Gap Years", apiname: "gap_years" },
-        { name: "Marks", apiname: "exam_scores" },
+        // { name: "Marks", apiname: "exam_scores" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
       "Civil Services": [
         { name: "Optional Subject", apiname: "optional_subject" },
         { name: "Gap Years", apiname: "gap_years" },
-        { name: "Marks", apiname: "exam_scores" },
+        // { name: "Marks", apiname: "exam_scores" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
     },
@@ -101,7 +101,7 @@ const Transcripts = ({ user, logout }) => {
     "Coding & Technical": {
       General: [
         { name: "Programming Languages", apiname: "programming_languages" },
-        { name: "Tech Stack Used", apiname: "tech_stack_used" },
+        // { name: "Tech Stack Used", apiname: "tech_stack_used" },
         { name: "Work Experience", apiname: "work_experience" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
@@ -125,13 +125,13 @@ const Transcripts = ({ user, logout }) => {
       General: [
         { name: "Optional Subject", apiname: "optional_subject" },
         { name: "Gap Years", apiname: "gap_years" },
-        { name: "Marks", apiname: "exam_scores" },
+        // { name: "Marks", apiname: "exam_scores" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
       "Civil Services": [
         { name: "Optional Subject", apiname: "optional_subject" },
         { name: "Gap Years", apiname: "gap_years" },
-        { name: "Marks", apiname: "exam_scores" },
+        // { name: "Marks", apiname: "exam_scores" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
     },
@@ -163,7 +163,7 @@ const Transcripts = ({ user, logout }) => {
     "Coding & Technical": {
       General: [
         { name: "Programming Languages", apiname: "programming_languages" },
-        { name: "Tech Stack Used", apiname: "tech_stack_used" },
+        // { name: "Tech Stack Used", apiname: "tech_stack_used" },
         { name: "Work Experience", apiname: "work_experience" },
         { name: "Year of Interview", apiname: "year_of_interview" },
       ],
@@ -416,6 +416,15 @@ const Transcripts = ({ user, logout }) => {
               </div>
             </Link>
           ))}
+          {filteredTranscripts.length===0 && 
+            <div className={`flex flex-col items-center ${indexStyle.blockstyle}`}
+            >
+              {/* <dd className="mt-2 leading-7 text-center text-white">
+                Oops, the interview experience according to the profile you mentioned is not available!
+              </dd> */}
+              {/* <FontAwesomeIcon icon={faArrowRight} className="mt-4" /> */}
+            </div>
+          }
         </div>
       </div>
       <Footer />
